@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Attendance</string>
 
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
+    <string name="title_section1">My Class List</string>
+    <string name="title_section2">Add a Class</string>
     <string name="title_section3">Section 3</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -22,4 +22,5 @@
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_attend">Attendance</string>
 </resources>

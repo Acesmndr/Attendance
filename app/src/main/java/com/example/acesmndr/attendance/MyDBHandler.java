@@ -150,20 +150,26 @@ public class MyDBHandler extends SQLiteOpenHelper{
     }
     public void openClass(String nameOfClass){
         Session session=findSession(nameOfClass);
-        Date Dtoday=new Date();
-        SimpleDateFormat df=new SimpleDateFormat("MMM d");
         SQLiteDatabase db=getWritableDatabase();
-        String query_open="SELECT * FROM "+nameOfClass+" WHERE dateToday ='"+df.format(Dtoday)+"'";
+        String query_open="SELECT * FROM "+nameOfClass+" WHERE dateToday ='"+getDate()+"'";
         Cursor cursor=db.rawQuery(query_open,null);
         if(cursor.moveToFirst()){ //test whether the attendance sheet of particular day exists
             cursor.close();
             return;
         }
         cursor.close();
-        query_open="INSERT INTO "+nameOfClass+" VALUES("+df.format(Dtoday); //if not exists add  one
+        query_open="INSERT INTO "+nameOfClass+" VALUES("+getDate(); //if not exists add  one
         for(int i=0;i<session.getNoS();i++){
             query_open+=",0";
         }
+        query_open+=")";
+        db.execSQL(query_open);
+        db.close();
 
+    }
+    public String getDate(){
+        Date Dtoday=new Date();
+        SimpleDateFormat df=new SimpleDateFormat("MMM d");
+        return df.format(Dtoday);
     }
 }

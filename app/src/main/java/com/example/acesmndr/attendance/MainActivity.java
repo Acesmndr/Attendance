@@ -21,7 +21,7 @@ import android.widget.TextView;
 
 
 public class MainActivity extends ActionBarActivity
-        implements AddClass.OnFragmentInteractionListener,NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements AddClass.OnFragmentInteractionListener, NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -51,16 +51,17 @@ public class MainActivity extends ActionBarActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
+        Fragment fragment;
         if(position==1) {
-            Fragment fragment=new AddClass();
+            fragment = new AddClass();
             FragmentManager fragmentManager = getSupportFragmentManager();
-            try {
-                fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
-            }
-            catch (ClassCastException e){
-
-            }
+            fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
         }
+
+
+
+
+
         /*fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
                 .commit();*/
