@@ -19,38 +19,41 @@ public class Attend extends ActionBarActivity {
     TextView rollDisplay;
     Button present;
     Button absent;
-    int roll;
+    int roll,noS;
+    String currentTable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attend);
-        Toast.makeText(Attend.this, getIntent().getExtras().getString("className"), Toast.LENGTH_SHORT).show();
-        MyDBHandler dbHandler=new MyDBHandler(this,null,null,1);
-        Session session=dbHandler.findSession(getIntent().getExtras().getString("className"));
-        setTitle(session.getClassName());
-        Date Dtoday=new Date();
-        SimpleDateFormat df=new SimpleDateFormat("MMM d");
+        //Toast.makeText(Attend.this, getIntent().getExtras().getString("className"), Toast.LENGTH_SHORT).show();
+        Session session=getCurrentSession(getIntent().getExtras().getString("className"));
+        currentTable=session.getClassName();
+        initiate();
+        setTitle(currentTable);
         roll=session.getRollStart();
-        Toast.makeText(this,df.format(Dtoday),Toast.LENGTH_SHORT).show();
+        noS=session.getNoS();
+        /*Date Dtoday=new Date();
+        SimpleDateFormat df=new SimpleDateFormat("MMM d");
+        Toast.makeText(this,df.format(Dtoday),Toast.LENGTH_SHORT).show();*/
         rollDisplay= (TextView) findViewById(R.id.rollDisplay);
         present= (Button) findViewById(R.id.present);
         absent= (Button) findViewById(R.id.absent);
         present.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sb.setProgress(sb.getProgress()+1);
+                progress(1,sb.getProgress());
             }
         });
         absent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sb.setProgress(sb.getProgress() + 1);
+                progress(0,sb.getProgress());
             }
         });
         rollDisplay.setText(Integer.toString(roll));
         sb= (SeekBar) findViewById(R.id.seekBar2);
-        sb.setMax(session.getNoS()-1);
+        sb.setMax(noS-1);
         sb.setProgress(0);
         sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -69,13 +72,32 @@ public class Attend extends ActionBarActivity {
             }
         });
     }
-    public void markPresent(String tableName,int roll){
-        /*MyDBHandler dbHandler=new MyDBHandler(Attend.this,null,null,1);
-        query="UPDATE "+tableName+" SET s"+roll+"=1 WHERE dateToday="+dbHandler.getDate();
-        dbHandler.*/
+    public void initiate(){
+        MyDBHandler dbHandler=new MyDBHandler(Attend.this,null,null,1);
+        dbHandler.openClass(currentTable);
     }
-    public void markAbsent(int roll){
-
+    public Session getCurrentSession(String nameOfClass){
+        MyDBHandler dbHandler=new MyDBHandler(Attend.this,null,null,1);
+        return dbHandler.findSession(nameOfClass);
+    }
+    public void progress(int ap,int progress){
+        if(ap==0) {
+            markAbsent(progress);
+        }else{
+            markPresent(progress);
+        }
+        if(progress==(noS-1)){
+            Toast.makeText(Attend.this,"Attendance Completed",Toast.LENGTH_SHORT).show();
+        }
+        sb.setProgress(progress+1);
+    }
+    public void markPresent(int sId){
+        MyDBHandler dbHandler=new MyDBHandler(Attend.this,null,null,1);
+        dbHandler.presentdb(currentTable,sId);
+    }
+    public void markAbsent(int sId){
+        MyDBHandler dbHandler=new MyDBHandler(Attend.this,null,null,1);
+        dbHandler.absentdb(currentTable,sId);
     }
 
 

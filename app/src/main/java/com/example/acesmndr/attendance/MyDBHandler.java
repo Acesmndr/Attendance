@@ -158,7 +158,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
             return;
         }
         cursor.close();
-        query_open="INSERT INTO "+nameOfClass+" VALUES("+getDate(); //if not exists add  one
+        query_open="INSERT INTO "+nameOfClass+" VALUES('"+getDate()+"'"; //if not exists add  one
         for(int i=0;i<session.getNoS();i++){
             query_open+=",0";
         }
@@ -171,5 +171,17 @@ public class MyDBHandler extends SQLiteOpenHelper{
         Date Dtoday=new Date();
         SimpleDateFormat df=new SimpleDateFormat("MMM d");
         return df.format(Dtoday);
+    }
+    public void presentdb(String tableName,int roll){
+        SQLiteDatabase db=getWritableDatabase();
+        String query="UPDATE "+tableName+" SET s"+roll+"=1 WHERE dateToday='"+getDate()+"'";
+        db.execSQL(query);
+        db.close();
+    }
+    public void absentdb(String tableName,int roll){
+        SQLiteDatabase db=getWritableDatabase();
+        String query="UPDATE "+tableName+" SET s"+roll+"=0 WHERE dateToday='"+getDate()+"'";
+        db.execSQL(query);
+        db.close();
     }
 }

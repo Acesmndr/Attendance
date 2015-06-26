@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:text="68002"
         android:id="@+id/rollDisplay"
-        android:textSize="100dp"
+        android:textSize="100sp"
         android:layout_marginBottom="81dp"
         android:layout_above="@+id/seekBar2"
         android:layout_centerHorizontal="true" />
@@ -44,8 +44,10 @@
         android:text="Absent"
         android:id="@+id/absent"
         android:textSize="35sp"
-        android:layout_alignBottom="@+id/present"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/present"
+        android:layout_toRightOf="@+id/present"
+        android:layout_toEndOf="@+id/present" />
 
 </RelativeLayout>
