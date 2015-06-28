@@ -113,7 +113,7 @@ public class AddClass extends Fragment {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getActivity(),Registerx.class);
+                Intent intent=new Intent(getActivity(),Register.class);
                 startActivity(intent);
 
             }

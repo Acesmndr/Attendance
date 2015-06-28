@@ -153,7 +153,7 @@ public class List extends Fragment {
 
     public String writeExternal(){
         MyDBHandler dbHandler=new MyDBHandler(getActivity(),null,null,1);
-        String[][] data=dbHandler.dataToExport("Acesa",68002);
+        String[][] data=dbHandler.dataToExport("sed",68002);
         String toPrint="Name,Aashish Manandhar\nRoll no,68002\n\n";
         for(int i=0;i<data.length;i++ ){
             for(int j=0;j<data[0].length;j++){

@@ -1,5 +1,7 @@
 package com.example.acesmndr.attendance;
 
+import android.content.Context;
+import android.os.Vibrator;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -86,6 +88,8 @@ public class Attend extends ActionBarActivity {
         }else{
             markPresent(progress);
         }
+        Vibrator vibrator= (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(300);
         if(progress==(noS-1)){
             Toast.makeText(Attend.this,"Attendance Completed",Toast.LENGTH_SHORT).show();
         }

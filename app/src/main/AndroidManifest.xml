@@ -3,6 +3,7 @@
     package="com.example.acesmndr.attendance" >
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -23,8 +24,8 @@
             android:label="@string/title_activity_attend" >
         </activity>
         <activity
-            android:name=".Registerx"
-            android:label="@string/title_activity_registerx" >
+            android:name=".Register"
+            android:label="@string/title_activity_register" >
         </activity>
     </application>
 

@@ -187,7 +187,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
     public String[][] dataToExport(String tableName,int rollStart){
         SQLiteDatabase db=getReadableDatabase();
         String query="SELECT * FROM "+tableName;
-        Cursor cursor=db.rawQuery(query,null);
+        Cursor cursor=db.rawQuery(query, null);
         String[][] register=new String[cursor.getColumnCount()][cursor.getCount()+1];
         if (cursor != null) {
                 register[0][0]=" ";
@@ -207,6 +207,25 @@ public class MyDBHandler extends SQLiteOpenHelper{
         db.close();
         return register;
         }
+    public String[][] registerShow(String tableName){
+        SQLiteDatabase db=getReadableDatabase();
+        String query="SELECT * FROM "+tableName;
+        Cursor cursor=db.rawQuery(query,null);
+        String[][] register=new String[cursor.getColumnCount()][cursor.getCount()];
+        if (cursor != null) {
+            int i = 0;
+            while(cursor.moveToNext()){
+                register[0][i]=cursor.getString(0);
+                for(int j=1;j<cursor.getColumnCount();j++) { // columnCount-1 for one of column is date
+                    register[j][i] = Integer.toString(cursor.getInt(j));
+                }
+                i++;
+            }
+        }
+        cursor.close();
+        db.close();
+        return register;
+    }
 
     }
 
