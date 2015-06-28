@@ -93,7 +93,7 @@ public class List extends Fragment {
         if(canWriteOnExternalStorage()){
             // get the path to sdcard
             File sdcard = Environment.getExternalStorageDirectory();
-            File dir = new File(sdcard.getAbsolutePath() + "/downloads/");// to this path add a new directory path
+            File dir = new File(sdcard.getAbsolutePath() + "/Attendance/");// to this path add a new directory path
             dir.mkdir();// create this directory if not already created
             File file = new File(dir, "aces.csv");// create the file in which we will write the contents
             FileOutputStream os = null;
@@ -102,9 +102,10 @@ public class List extends Fragment {
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-            String data = "latitude,longitude,HQ_NAME\n" +
+            /*String data = "latitude,longitude,HQ_NAME\n" +
                     "29.97531509,81.81872559,Simikot\n" +
-                    "29.84737968,80.57302856,Darchula";
+                    "29.84737968,80.57302856,Darchula";*/
+            String data=writeExternal();
             try {
                 os.write(data.getBytes());
                 os.close();
@@ -149,6 +150,24 @@ public class List extends Fragment {
         }
         return false;
     }
+
+    public String writeExternal(){
+        MyDBHandler dbHandler=new MyDBHandler(getActivity(),null,null,1);
+        String[][] data=dbHandler.dataToExport("Acesa",68002);
+        String toPrint="Name,Aashish Manandhar\nRoll no,68002\n\n";
+        for(int i=0;i<data.length;i++ ){
+            for(int j=0;j<data[0].length;j++){
+                if(j==0){
+                    toPrint+=data[i][j];
+                }else{
+                    toPrint+=","+data[i][j];
+                }
+            }
+            toPrint+="\n";
+        }
+    return toPrint;
+    }
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
