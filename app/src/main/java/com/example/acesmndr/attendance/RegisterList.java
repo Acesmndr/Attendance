@@ -6,13 +6,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -25,13 +25,12 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ClassList.OnFragmentInteractionListener} interface
+ * {@link RegisterList.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link ClassList#newInstance} factory method to
+ * Use the {@link RegisterList#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ClassList extends Fragment {
-
+public class RegisterList extends Fragment {
     ArrayList<Session> Sessions = new ArrayList<Session>();
     ListView sessionListView;
     MyDBHandler dbsHandler;
@@ -52,11 +51,11 @@ public class ClassList extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ClassList.
+     * @return A new instance of fragment RegisterList.
      */
     // TODO: Rename and change types and number of parameters
-    public static ClassList newInstance(String param1, String param2) {
-        ClassList fragment = new ClassList();
+    public static RegisterList newInstance(String param1, String param2) {
+        RegisterList fragment = new RegisterList();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,7 +63,7 @@ public class ClassList extends Fragment {
         return fragment;
     }
 
-    public ClassList() {
+    public RegisterList() {
         // Required empty public constructor
     }
 
@@ -85,35 +84,11 @@ public class ClassList extends Fragment {
         //setTitle("Attendance:Select a Class");
         sessionListView= (ListView) view.findViewById(R.id.listView);
         dbsHandler=new MyDBHandler(getActivity(),null,null,1);
+        TextView whatItDoes= (TextView) view.findViewById(R.id.whatItDoes);
+        whatItDoes.setText("Select a class:");
         if(dbsHandler.getSessionCount()!=0)
-            Toast.makeText(getActivity(),"Hello", Toast.LENGTH_LONG).show();
-        String[] val;
-        val=dbsHandler.getAllClassesA();
-        //Toast.makeText(ClassList.this,val[0]+"loves"+val[1],Toast.LENGTH_SHORT).show();
-        if(canWriteOnExternalStorage()){
-            // get the path to sdcard
-            File sdcard = Environment.getExternalStorageDirectory();
-            File dir = new File(sdcard.getAbsolutePath() + "/Download/");// to this path add a new directory path
-            dir.mkdir();// create this directory if not already created
-            File file = new File(dir, "aces.csv");// create the file in which we will write the contents
-            FileOutputStream os = null;
-            try {
-                os = new FileOutputStream(file);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            /*String data = "latitude,longitude,HQ_NAME\n" +
-                    "29.97531509,81.81872559,Simikot\n" +
-                    "29.84737968,80.57302856,Darchula";*/
-            String data=writeExternal();
-            try {
-                os.write(data.getBytes());
-                os.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        };
+            Toast.makeText(getActivity(), "Hello", Toast.LENGTH_LONG).show();
+        String[] val=dbsHandler.getAllClassesA();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_list_item_1, android.R.id.text1, val);
         sessionListView.setAdapter(adapter);
@@ -130,41 +105,13 @@ public class ClassList extends Fragment {
 
                 // ListView Clicked item value
                 String itemValue = (String) sessionListView.getItemAtPosition(position);
-                Intent intent = new Intent(getActivity(), Attend.class);
-                intent.putExtra("className", itemValue);
+                Intent intent = new Intent(getActivity(), Register.class);
+                intent.putExtra("nameOfClass", itemValue);
                 startActivity(intent);
             }
 
         });
         return view;
-    }
-
-    public static boolean canWriteOnExternalStorage() {
-        // get the state of your external storage
-        String state = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(state)) {
-            // if storage is mounted return true
-            Log.v("sTag", "Yes, can write to external storage.");
-            return true;
-        }
-        return false;
-    }
-
-    public String writeExternal(){
-        MyDBHandler dbHandler=new MyDBHandler(getActivity(),null,null,1);
-        String[][] data=dbHandler.dataToExport("KEC BCT A 2068",68002);
-        String toPrint="Name,Aashish Manandhar\nRoll no,68002\n\n";
-        for(int i=0;i<data.length;i++ ){
-            for(int j=0;j<data[0].length;j++){
-                if(j==0){
-                    toPrint+=data[i][j];
-                }else{
-                    toPrint+=","+data[i][j];
-                }
-            }
-            toPrint+="\n";
-        }
-    return toPrint;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -196,7 +143,7 @@ public class ClassList extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p>
+     * <p/>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.

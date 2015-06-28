@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class MyDBHandler extends SQLiteOpenHelper{
     private ContentResolver myCR;
-    private static final int DATABASE_VERSION=1;
+    private static final int DATABASE_VERSION=2;
     private static final String DATABASE_NAME = "attendanceDB.db";
     public static final String TABLE_NAME = "classes";
 
@@ -47,12 +47,13 @@ public class MyDBHandler extends SQLiteOpenHelper{
     public boolean addSession(Session session){
         if(findSession(session.getClassName())==null) {
             ContentValues values = new ContentValues();
-            values.put(COLUMN_NAMEOFCLASS, session.getClassName());
+            values.put(COLUMN_NAMEOFCLASS,session.getClassName());
             values.put(COLUMN_ROLLSTART, session.getRollStart());
             values.put(COLUMN_NOS, session.getNoS());
             SQLiteDatabase db = this.getWritableDatabase();
             db.insert(TABLE_NAME, null, values);
             db.close();
+            session=findSession(session.getClassName());
             createClassTable(session);
             //openClass(session.getClassName());
             return true;
@@ -89,7 +90,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
             session.setID(Integer.parseInt(cursor.getString(0)));
             db.delete(TABLE_NAME, COLUMN_ID + "= ?", new String[]{String.valueOf(session.getID())});
             cursor.close();
-            String query_delete="DROP TABLE IF EXISTS "+nameOfClass;
+            String query_delete="DROP TABLE IF EXISTS class"+session.getID();
             db.execSQL(query_delete);
             result=true;
         }
@@ -119,8 +120,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
         if (cursor != null) {
             int i = 0;
             while(cursor.moveToNext()){
-                                Log.d("cow", "a"+i);
-                               data[i] = cursor.getString(1);
+                                data[i] = cursor.getString(1);
                                 i=i+1;
                                //cursor.moveToNext();
             }
@@ -140,7 +140,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
     }
     public void createClassTable(Session session){
         SQLiteDatabase db=getWritableDatabase();
-        String query_create="CREATE TABLE "+session.getClassName()+" (dateToday VARCHAR NOT NULL";
+        String query_create="CREATE TABLE class"+session.getID()+" (dateToday VARCHAR NOT NULL";
         for(int i=0;i<session.getNoS();i++){
             query_create+=" ,s"+i+" BOOLEAN NOT NULL ";
         }
@@ -151,14 +151,14 @@ public class MyDBHandler extends SQLiteOpenHelper{
     public void openClass(String nameOfClass){
         Session session=findSession(nameOfClass);
         SQLiteDatabase db=getWritableDatabase();
-        String query_open="SELECT * FROM "+nameOfClass+" WHERE dateToday ='"+getDate()+"'";
+        String query_open="SELECT * FROM class"+session.getID()+" WHERE dateToday ='"+getDate()+"'";
         Cursor cursor=db.rawQuery(query_open,null);
         if(cursor.moveToFirst()){ //test whether the attendance sheet of particular day exists
             cursor.close();
             return;
         }
         cursor.close();
-        query_open="INSERT INTO "+nameOfClass+" VALUES('"+getDate()+"'"; //if not exists add  one
+        query_open="INSERT INTO class"+session.getID()+" VALUES('"+getDate()+"'"; //if not exists add  one
         for(int i=0;i<session.getNoS();i++){
             query_open+=",0";
         }
@@ -173,14 +173,16 @@ public class MyDBHandler extends SQLiteOpenHelper{
         return df.format(Dtoday);
     }
     public void presentdb(String tableName,int roll){
+        Session session=findSession(tableName);
         SQLiteDatabase db=getWritableDatabase();
-        String query="UPDATE "+tableName+" SET s"+roll+"=1 WHERE dateToday='"+getDate()+"'";
+        String query="UPDATE class"+session.getID()+" SET s"+roll+"=1 WHERE dateToday='"+getDate()+"'";
         db.execSQL(query);
         db.close();
     }
     public void absentdb(String tableName,int roll){
+        Session session=findSession(tableName);
         SQLiteDatabase db=getWritableDatabase();
-        String query="UPDATE "+tableName+" SET s"+roll+"=0 WHERE dateToday='"+getDate()+"'";
+        String query="UPDATE class"+session.getID()+" SET s"+roll+"=0 WHERE dateToday='"+getDate()+"'";
         db.execSQL(query);
         db.close();
     }
@@ -188,7 +190,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
         Session session=findSession(tableName);
         Date Dtoday=new Date();
         SQLiteDatabase db=getWritableDatabase();
-        String query_open="INSERT INTO "+tableName+" VALUES('"+Dtoday+"'"; //if not exists add  one
+        String query_open="INSERT INTO class"+session.getID()+" VALUES('"+Dtoday+"'"; //if not exists add  one
         for(int i=0;i<session.getNoS();i++){
             query_open+=",1";
         }
@@ -197,8 +199,9 @@ public class MyDBHandler extends SQLiteOpenHelper{
         db.close();
     }
     public String[][] dataToExport(String tableName,int rollStart){
+        Session session=findSession(tableName);
         SQLiteDatabase db=getReadableDatabase();
-        String query="SELECT * FROM "+tableName;
+        String query="SELECT * FROM class"+session.getID();
         Cursor cursor=db.rawQuery(query, null);
         String[][] register=new String[cursor.getColumnCount()][cursor.getCount()+1];
         if (cursor != null) {
@@ -220,8 +223,9 @@ public class MyDBHandler extends SQLiteOpenHelper{
         return register;
         }
     public String[][] registerShow(String tableName){
+        Session session=findSession(tableName);
         SQLiteDatabase db=getReadableDatabase();
-        String query="SELECT * FROM "+tableName;
+        String query="SELECT * FROM class"+session.getID();
         Cursor cursor=db.rawQuery(query,null);
         String[][] register=new String[cursor.getColumnCount()][cursor.getCount()];
         if (cursor != null) {

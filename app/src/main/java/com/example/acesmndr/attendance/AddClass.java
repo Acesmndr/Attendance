@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
@@ -16,6 +17,8 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.File;
 
 
 /**
@@ -121,8 +124,21 @@ public class AddClass extends Fragment {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getActivity(),Register.class);
-                startActivity(intent);
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"a4developers@gmail.com"});
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Attendance List of a Class");
+                intent.putExtra(Intent.EXTRA_TEXT, "Attendance done by attendance application developed by A4 developers");
+                File root = Environment.getExternalStorageDirectory();
+                File file = new File(root, "/Download/aces.csv");
+                if (!file.exists() || !file.canRead()) {
+                    Toast.makeText(getActivity(), "Attachment Error", Toast.LENGTH_SHORT).show();
+                    //finish();
+                    return;
+                }
+                Uri uri = Uri.parse("file://" + file.getAbsolutePath());
+                intent.putExtra(Intent.EXTRA_STREAM, uri);
+                startActivity(Intent.createChooser(intent, "Send via Email"));
 
             }
         });

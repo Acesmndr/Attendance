@@ -23,7 +23,7 @@ public class Register extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         MyDBHandler dbHandler=new MyDBHandler(this,null,null,1);
-        String[][] data=dbHandler.registerShow("sed");
+        String[][] data=dbHandler.registerShow(getIntent().getExtras().getString("nameOfClass"));
         int[] totalAttendance=new int[data.length];
         totalAttendance[0]=0;
         for(int i=1;i<data.length;i++){

@@ -3,7 +3,7 @@
 
     <string name="title_section1">My Class List</string>
     <string name="title_section2">Add a Class</string>
-    <string name="title_section3">Delete a Class</string>
+    <string name="title_section3">Attendance Register</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
