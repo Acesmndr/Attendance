@@ -32,7 +32,7 @@ public class AddClass extends Fragment {
     EditText rollStartX;
     SeekBar noSX;
     TextView noSDisplayX;
-    Button addButton,deleteButton,searchButton,register;
+    Button addButton,deleteButton,searchButton,register,list;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -91,6 +91,14 @@ public class AddClass extends Fragment {
         deleteButton= (Button) view.findViewById(R.id.deleteButton);
         searchButton= (Button) view.findViewById(R.id.searchButton);
         register= (Button) view.findViewById(R.id.register);
+        list= (Button) view.findViewById(R.id.listButton);
+        list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyDBHandler dbHandler=new MyDBHandler(getActivity(),null,null,1);
+                dbHandler.addRandom(nameOfClassX.getText().toString());
+            }
+        });
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

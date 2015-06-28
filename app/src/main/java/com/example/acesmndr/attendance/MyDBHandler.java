@@ -184,6 +184,18 @@ public class MyDBHandler extends SQLiteOpenHelper{
         db.execSQL(query);
         db.close();
     }
+    public void addRandom(String tableName){
+        Session session=findSession(tableName);
+        Date Dtoday=new Date();
+        SQLiteDatabase db=getWritableDatabase();
+        String query_open="INSERT INTO "+tableName+" VALUES('"+Dtoday+"'"; //if not exists add  one
+        for(int i=0;i<session.getNoS();i++){
+            query_open+=",1";
+        }
+        query_open+=")";
+        db.execSQL(query_open);
+        db.close();
+    }
     public String[][] dataToExport(String tableName,int rollStart){
         SQLiteDatabase db=getReadableDatabase();
         String query="SELECT * FROM "+tableName;
@@ -226,6 +238,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
         db.close();
         return register;
     }
+
 
     }
 

@@ -1,6 +1,9 @@
 package com.example.acesmndr.attendance;
 
+import android.app.ActionBar;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Vibrator;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -11,6 +14,7 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -101,7 +105,7 @@ public class Attend extends ActionBarActivity {
     }
     public void markAbsent(int sId){
         MyDBHandler dbHandler=new MyDBHandler(Attend.this,null,null,1);
-        dbHandler.absentdb(currentTable,sId);
+        dbHandler.absentdb(currentTable, sId);
     }
 
 

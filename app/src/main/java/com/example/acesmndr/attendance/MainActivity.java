@@ -6,23 +6,17 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 
 public class MainActivity extends ActionBarActivity
-        implements AddClass.OnFragmentInteractionListener,List.OnFragmentInteractionListener, NavigationDrawerFragment.NavigationDrawerCallbacks {
-
+        implements AddClass.OnFragmentInteractionListener,ClassList.OnFragmentInteractionListener, NavigationDrawerFragment.NavigationDrawerCallbacks {
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -53,12 +47,17 @@ public class MainActivity extends ActionBarActivity
         // update the main content by replacing fragments
         Fragment fragment;
         if(position==0) {
-            fragment = new List();
+            fragment = new ClassList();
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
         }
         if(position==1) {
             fragment = new AddClass();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
+        }
+        if(position==2) {
+            fragment = new ClassList();
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
         }

@@ -25,12 +25,12 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link List.OnFragmentInteractionListener} interface
+ * {@link ClassList.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link List#newInstance} factory method to
+ * Use the {@link ClassList#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class List extends Fragment {
+public class ClassList extends Fragment {
 
     ArrayList<Session> Sessions = new ArrayList<Session>();
     ListView sessionListView;
@@ -52,11 +52,11 @@ public class List extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment List.
+     * @return A new instance of fragment ClassList.
      */
     // TODO: Rename and change types and number of parameters
-    public static List newInstance(String param1, String param2) {
-        List fragment = new List();
+    public static ClassList newInstance(String param1, String param2) {
+        ClassList fragment = new ClassList();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,7 +64,7 @@ public class List extends Fragment {
         return fragment;
     }
 
-    public List() {
+    public ClassList() {
         // Required empty public constructor
     }
 
@@ -81,7 +81,7 @@ public class List extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_list,container,false);
+        View view=inflater.inflate(R.layout.fragment_list, container, false);
         //setTitle("Attendance:Select a Class");
         sessionListView= (ListView) view.findViewById(R.id.listView);
         dbsHandler=new MyDBHandler(getActivity(),null,null,1);
@@ -89,7 +89,7 @@ public class List extends Fragment {
             Toast.makeText(getActivity(),"Hello", Toast.LENGTH_LONG).show();
         String[] val;
         val=dbsHandler.getAllClassesA();
-        //Toast.makeText(List.this,val[0]+"loves"+val[1],Toast.LENGTH_SHORT).show();
+        //Toast.makeText(ClassList.this,val[0]+"loves"+val[1],Toast.LENGTH_SHORT).show();
         if(canWriteOnExternalStorage()){
             // get the path to sdcard
             File sdcard = Environment.getExternalStorageDirectory();
@@ -127,12 +127,12 @@ public class List extends Fragment {
                                     int position, long id) {
 
                 // ListView Clicked item index
-                int itemPosition     = position;
+                int itemPosition = position;
 
                 // ListView Clicked item value
-                String  itemValue    = (String) sessionListView.getItemAtPosition(position);
-                Intent intent=new Intent(getActivity(),Attend.class);
-                intent.putExtra("className",itemValue);
+                String itemValue = (String) sessionListView.getItemAtPosition(position);
+                Intent intent = new Intent(getActivity(), Attend.class);
+                intent.putExtra("className", itemValue);
                 startActivity(intent);
             }
 
