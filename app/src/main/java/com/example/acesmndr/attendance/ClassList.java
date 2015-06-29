@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -82,39 +83,27 @@ public class ClassList extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_list, container, false);
+        ArrayList<String> list = new ArrayList<String>();
         //setTitle("Attendance:Select a Class");
         sessionListView= (ListView) view.findViewById(R.id.listView);
         dbsHandler=new MyDBHandler(getActivity(),null,null,1);
-        if(dbsHandler.getSessionCount()!=0)
-            Toast.makeText(getActivity(),"Hello", Toast.LENGTH_LONG).show();
+        if(dbsHandler.getSessionCount()==0) {
+            TextView whatItDoes = (TextView) view.findViewById(R.id.whatItDoes);
+            whatItDoes.setText("It feels Lonely in here! :( Add a class ");
+        }
         String[] val;
         val=dbsHandler.getAllClassesA();
-        //Toast.makeText(ClassList.this,val[0]+"loves"+val[1],Toast.LENGTH_SHORT).show();
-        if(canWriteOnExternalStorage()){
-            // get the path to sdcard
-            File sdcard = Environment.getExternalStorageDirectory();
-            File dir = new File(sdcard.getAbsolutePath() + "/Download/");// to this path add a new directory path
-            dir.mkdir();// create this directory if not already created
-            File file = new File(dir, "aces.csv");// create the file in which we will write the contents
-            FileOutputStream os = null;
-            try {
-                os = new FileOutputStream(file);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            /*String data = "latitude,longitude,HQ_NAME\n" +
-                    "29.97531509,81.81872559,Simikot\n" +
-                    "29.84737968,80.57302856,Darchula";*/
-            String data="aces";//writeExternal();
-            try {
-                os.write(data.getBytes());
-                os.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        for(int i=0;i<val.length;i++){
+            list.add(val[i]);
+        }
+        CustomListAdapter adapter = new CustomListAdapter(list, getActivity(),1);
 
-        };
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+        //handle listview and assign adapter
+        ListView lView = (ListView) view.findViewById(R.id.listView);
+        lView.setAdapter(adapter);
+        //Toast.makeText(ClassList.this,val[0]+"loves"+val[1],Toast.LENGTH_SHORT).show();
+
+        /*ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_list_item_1, android.R.id.text1, val);
         sessionListView.setAdapter(adapter);
 
@@ -131,41 +120,15 @@ public class ClassList extends Fragment {
                 // ListView Clicked item value
                 String itemValue = (String) sessionListView.getItemAtPosition(position);
                 Intent intent = new Intent(getActivity(), Attend.class);
-                intent.putExtra("className", itemValue);
+                intent.putExtra("nameOfClass", itemValue);
                 startActivity(intent);
             }
 
-        });
+        });*/
         return view;
     }
 
-    public static boolean canWriteOnExternalStorage() {
-        // get the state of your external storage
-        String state = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(state)) {
-            // if storage is mounted return true
-            Log.v("sTag", "Yes, can write to external storage.");
-            return true;
-        }
-        return false;
-    }
 
-    public String writeExternal(){
-        MyDBHandler dbHandler=new MyDBHandler(getActivity(),null,null,1);
-        String[][] data=dbHandler.dataToExport("KEC BCT A 2068",68002);
-        String toPrint="Name,Aashish Manandhar\nRoll no,68002\n\n";
-        for(int i=0;i<data.length;i++ ){
-            for(int j=0;j<data[0].length;j++){
-                if(j==0){
-                    toPrint+=data[i][j];
-                }else{
-                    toPrint+=","+data[i][j];
-                }
-            }
-            toPrint+="\n";
-        }
-    return toPrint;
-    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

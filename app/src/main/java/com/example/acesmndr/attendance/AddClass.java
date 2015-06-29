@@ -35,7 +35,7 @@ public class AddClass extends Fragment {
     EditText rollStartX;
     SeekBar noSX;
     TextView noSDisplayX;
-    Button addButton,deleteButton,searchButton,register,list;
+    Button addButton,list;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -91,10 +91,7 @@ public class AddClass extends Fragment {
         noSX = (SeekBar) view.findViewById(R.id.seekBar);
         noSDisplayX = (TextView) view.findViewById(R.id.textView4);
         addButton= (Button) view.findViewById(R.id.addButton);
-        deleteButton= (Button) view.findViewById(R.id.deleteButton);
-        searchButton= (Button) view.findViewById(R.id.searchButton);
-        register= (Button) view.findViewById(R.id.register);
-        list= (Button) view.findViewById(R.id.listButton);
+        list= (Button) view.findViewById(R.id.cancelButton);
         list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,7 +106,7 @@ public class AddClass extends Fragment {
 
             }
         });
-        deleteButton.setOnClickListener(new View.OnClickListener() {
+        /*deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 removeSession(v);
@@ -120,28 +117,7 @@ public class AddClass extends Fragment {
             public void onClick(View v) {
                 lookUpSession(v);
             }
-        });
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"a4developers@gmail.com"});
-                intent.putExtra(Intent.EXTRA_SUBJECT, "Attendance List of a Class");
-                intent.putExtra(Intent.EXTRA_TEXT, "Attendance done by attendance application developed by A4 developers");
-                File root = Environment.getExternalStorageDirectory();
-                File file = new File(root, "/Download/aces.csv");
-                if (!file.exists() || !file.canRead()) {
-                    Toast.makeText(getActivity(), "Attachment Error", Toast.LENGTH_SHORT).show();
-                    //finish();
-                    return;
-                }
-                Uri uri = Uri.parse("file://" + file.getAbsolutePath());
-                intent.putExtra(Intent.EXTRA_STREAM, uri);
-                startActivity(Intent.createChooser(intent, "Send via Email"));
-
-            }
-        });
+        });*/
         noSX.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -169,7 +145,7 @@ public class AddClass extends Fragment {
         boolean check=dbHandler.addSession(session);
         if(check==true){
             Intent intent=new Intent(getActivity(),Attend.class);
-            intent.putExtra("className",nameOfClassX.getText().toString());
+            intent.putExtra("nameOfClass",nameOfClassX.getText().toString());
             startActivity(intent);
             return;
         }

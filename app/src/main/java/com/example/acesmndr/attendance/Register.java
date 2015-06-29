@@ -24,6 +24,7 @@ public class Register extends ActionBarActivity {
         setContentView(R.layout.activity_register);
         MyDBHandler dbHandler=new MyDBHandler(this,null,null,1);
         String[][] data=dbHandler.registerShow(getIntent().getExtras().getString("nameOfClass"));
+        Toast.makeText(this,getIntent().getExtras().getString("nameOfClass"),Toast.LENGTH_LONG).show();
         int[] totalAttendance=new int[data.length];
         totalAttendance[0]=0;
         for(int i=1;i<data.length;i++){

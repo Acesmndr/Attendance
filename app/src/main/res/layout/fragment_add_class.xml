@@ -8,24 +8,23 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/name_of_class"
         android:id="@+id/textView"
-        android:layout_above="@+id/textView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:textColor="#616161"
         android:textSize="25sp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp" />
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+         />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editText"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/textView"
-        android:paddingRight="10dp"
-        android:layout_marginTop="25dp"
-        android:layout_alignRight="@+id/editText2"
-        android:layout_alignEnd="@+id/editText2" />
+        android:layout_toRightOf="@id/textView"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_alignParentRight="true"
+        android:paddingRight="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -33,26 +32,25 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/roll_start"
         android:id="@+id/textView2"
-        android:layout_below="@+id/editText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="30dp"
         android:textColor="#616161"
         android:textSize="25sp"
-        android:paddingLeft="10dp" />
+        android:layout_marginLeft="20dp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:ems="10"
+        android:ems="4"
         android:id="@+id/editText2"
         android:text="1"
-        android:layout_alignTop="@+id/textView2"
-        android:layout_toEndOf="@+id/textView2"
-        android:layout_marginRight="15dp"
+        android:textSize="22sp"
+        android:layout_marginLeft="20dp"
         android:layout_toRightOf="@+id/textView2"
-        android:layout_marginBottom="5dp" />
+        android:layout_below="@id/editText"
+        android:layout_marginTop="10dp"
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -61,27 +59,10 @@
         android:text="@string/no_of_students"
         android:id="@+id/textView3"
         android:layout_below="@+id/textView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="25dp"
         android:textColor="#616161"
         android:textSize="25sp"
-        android:paddingLeft="10dp" />
-
-    <SeekBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/seekBar"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/editText2"
-        android:layout_alignEnd="@+id/editText2"
-        android:progress="44"
-        android:max="50"
-        android:layout_below="@+id/textView3"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp" />
+        android:layout_marginLeft="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -91,63 +72,32 @@
         android:id="@+id/textView4"
         android:textColor="#616161"
         android:textSize="25sp"
-        android:layout_alignTop="@+id/textView3"
-        android:layout_alignLeft="@+id/editText2"
-        android:layout_alignStart="@+id/editText2"
-        android:layout_marginBottom="4dp" />
+        android:layout_toRightOf="@id/textView3"
+        android:layout_below="@id/editText2"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"/>
 
-    <Button
-        android:layout_width="wrap_content"
+    <SeekBar
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register"
-        android:id="@+id/register"
-       android:layout_gravity="left|bottom"
-        android:layout_below="@+id/deleteButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:id="@+id/seekBar"
+        android:progress="44"
+        android:max="50"
+        android:layout_below="@+id/textView3"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="List"
-        android:id="@+id/listButton"
-        android:layout_gravity="center_horizontal|bottom"
-        android:layout_below="@+id/addButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="DELETE"
-        android:id="@+id/deleteButton"
-        android:onClick="RemoveSession"
-        android:layout_gravity="right|bottom"
-        android:layout_below="@+id/listButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SEARCH"
-        android:id="@+id/searchButton"
-        android:onClick="lookUpSession"
-        android:layout_gravity="center"
-        android:layout_above="@+id/listButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
+     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ADD"
         android:id="@+id/addButton"
-        android:layout_gravity="left|center_vertical"
         android:background="#00E676"
         android:textColor="@android:color/white"
-        android:shadowColor="@android:color/darker_gray"
         android:layout_below="@+id/seekBar"
+        android:layout_toLeftOf="@+id/cancelButton"
+        android:layout_marginRight="20dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:textSize="20sp" />
@@ -156,14 +106,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cancel"
-        android:id="@+id/button"
+        android:id="@+id/cancelButton"
         android:background="#D32F2F"
         android:textColor="@android:color/white"
-        android:layout_above="@+id/listButton"
-        android:layout_alignRight="@+id/seekBar"
-        android:layout_alignEnd="@+id/seekBar"
+        android:layout_below="@+id/seekBar"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
         android:textSize="20sp" />
-
 
 
     <!--LinearLayout

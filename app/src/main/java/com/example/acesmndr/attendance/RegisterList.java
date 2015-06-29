@@ -83,50 +83,16 @@ public class RegisterList extends Fragment {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_list, container, false);
         ArrayList<String> list = new ArrayList<String>();
-        /*list.add("item1");
-        list.add("item2");*/
-
-        //instantiate custom adapter
-
-        //setTitle("Attendance:Select a Class");
-        /*sessionListView= (ListView) view.findViewById(R.id.listView);*/
         dbsHandler=new MyDBHandler(getActivity(),null,null,1);
         TextView whatItDoes= (TextView) view.findViewById(R.id.whatItDoes);
         whatItDoes.setText("Select a class:");
-        if(dbsHandler.getSessionCount()!=0)
-            Toast.makeText(getActivity(), "Hello", Toast.LENGTH_LONG).show();
         String[] val=dbsHandler.getAllClassesA();
         for(int i=0;i<val.length;i++){
             list.add(val[i]);
         }
-        CustomListAdapter adapter = new CustomListAdapter(list, getActivity());
-
-        //handle listview and assign adapter
-        ListView lView = (ListView) view.findViewById(R.id.listView);
+        CustomListAdapter adapter = new CustomListAdapter(list, getActivity(),0);
+ListView lView = (ListView) view.findViewById(R.id.listView);
         lView.setAdapter(adapter);
-        /*String[] val=dbsHandler.getAllClassesA();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, val);
-        sessionListView.setAdapter(adapter);
-
-        // ListView Item Click Listener
-        sessionListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-
-                // ListView Clicked item index
-                int itemPosition = position;
-
-                // ListView Clicked item value
-                String itemValue = (String) sessionListView.getItemAtPosition(position);
-                Intent intent = new Intent(getActivity(), Register.class);
-                intent.putExtra("nameOfClass", itemValue);
-                startActivity(intent);
-            }
-
-        });*/
         return view;
     }
 

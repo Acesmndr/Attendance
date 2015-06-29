@@ -188,9 +188,9 @@ public class MyDBHandler extends SQLiteOpenHelper{
     }
     public void addRandom(String tableName){
         Session session=findSession(tableName);
-        Date Dtoday=new Date();
+        //Date Dtoday=new Date();
         SQLiteDatabase db=getWritableDatabase();
-        String query_open="INSERT INTO class"+session.getID()+" VALUES('"+Dtoday+"'"; //if not exists add  one
+        String query_open="INSERT INTO class"+session.getID()+" VALUES('"+System.currentTimeMillis()+"'"; //if not exists add  one
         for(int i=0;i<session.getNoS();i++){
             query_open+=",1";
         }

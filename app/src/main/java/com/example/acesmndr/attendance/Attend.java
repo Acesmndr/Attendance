@@ -1,7 +1,11 @@
 package com.example.acesmndr.attendance;
 
 import android.app.ActionBar;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Vibrator;
@@ -33,7 +37,7 @@ public class Attend extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attend);
         //Toast.makeText(Attend.this, getIntent().getExtras().getString("className"), Toast.LENGTH_SHORT).show();
-        Session session=getCurrentSession(getIntent().getExtras().getString("className"));
+        Session session=getCurrentSession(getIntent().getExtras().getString("nameOfClass"));
         currentTable=session.getClassName();
         initiate();
         setTitle(currentTable);
@@ -93,19 +97,32 @@ public class Attend extends ActionBarActivity {
             markPresent(progress);
         }
         Vibrator vibrator= (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        vibrator.vibrate(300);
+        vibrator.vibrate(150);
         if(progress==(noS-1)){
-            Toast.makeText(Attend.this,"Attendance Completed",Toast.LENGTH_SHORT).show();
-        }
+            NotificationManager mnotificationManager= (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            Notification notification=new Notification(android.R.drawable.stat_notify_sdcard,"Attendance Completed",System.currentTimeMillis());
+            Context context=Attend.this;
+            CharSequence title="Attendance complete";
+            CharSequence details="Attendance of KEC BCT A has been completed";
+            Intent intent=new Intent(context,Register.class);
+            intent.putExtra("nameOfClass",currentTable);
+            PendingIntent pendingIntent=PendingIntent.getActivity(context,0,intent,0);
+            notification.setLatestEventInfo(context,title,details,pendingIntent);
+            mnotificationManager.notify(0, notification);
+            vibrator.vibrate(350);
+            }
         sb.setProgress(progress+1);
     }
     public void markPresent(int sId){
         MyDBHandler dbHandler=new MyDBHandler(Attend.this,null,null,1);
-        dbHandler.presentdb(currentTable,sId);
+        dbHandler.presentdb(currentTable, sId);
+
+
     }
     public void markAbsent(int sId){
         MyDBHandler dbHandler=new MyDBHandler(Attend.this,null,null,1);
         dbHandler.absentdb(currentTable, sId);
+
     }
 
 
