@@ -1,27 +1,19 @@
 package com.example.acesmndr.attendance;
 
-import android.app.ActionBar;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.Toolbar;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 
 public class Attend extends ActionBarActivity {
@@ -99,16 +91,15 @@ public class Attend extends ActionBarActivity {
         Vibrator vibrator= (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(150);
         if(progress==(noS-1)){
-            NotificationManager mnotificationManager= (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            Notification notification=new Notification(android.R.drawable.stat_notify_sdcard,"Attendance Completed",System.currentTimeMillis());
+            NotificationManager notificationManager= (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            Notification notification=new Notification(R.drawable.abc_ic_menu_paste_mtrl_am_alpha,"Attendance Completed",System.currentTimeMillis());
             Context context=Attend.this;
             CharSequence title="Attendance complete";
-            CharSequence details="Attendance of KEC BCT A has been completed";
-            Intent intent=new Intent(context,Register.class);
-            intent.putExtra("nameOfClass",currentTable);
+            CharSequence details=currentTable;
+            Intent intent=new Intent(context,MainActivity.class);
             PendingIntent pendingIntent=PendingIntent.getActivity(context,0,intent,0);
             notification.setLatestEventInfo(context,title,details,pendingIntent);
-            mnotificationManager.notify(0, notification);
+            notificationManager.notify(0, notification);
             vibrator.vibrate(350);
             }
         sb.setProgress(progress+1);

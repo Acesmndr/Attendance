@@ -7,25 +7,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.TextView;
-
-import java.util.ArrayList;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ClassList.OnFragmentInteractionListener} interface
+ * {@link AboutUs.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link ClassList#newInstance} factory method to
+ * Use the {@link AboutUs#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ClassList extends Fragment {
-
-    ArrayList<Session> Sessions = new ArrayList<Session>();
-    ListView sessionListView;
-    MyDBHandler dbsHandler;
+public class AboutUs extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -43,11 +35,11 @@ public class ClassList extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ClassList.
+     * @return A new instance of fragment AboutUs.
      */
     // TODO: Rename and change types and number of parameters
-    public static ClassList newInstance(String param1, String param2) {
-        ClassList fragment = new ClassList();
+    public static AboutUs newInstance(String param1, String param2) {
+        AboutUs fragment = new AboutUs();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -55,7 +47,7 @@ public class ClassList extends Fragment {
         return fragment;
     }
 
-    public ClassList() {
+    public AboutUs() {
         // Required empty public constructor
     }
 
@@ -72,53 +64,8 @@ public class ClassList extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_list, container, false);
-        ArrayList<String> list = new ArrayList<String>();
-        //setTitle("Attendance:Select a Class");
-        sessionListView= (ListView) view.findViewById(R.id.listView);
-        dbsHandler=new MyDBHandler(getActivity(),null,null,1);
-        if(dbsHandler.getSessionCount()==0) {
-            TextView whatItDoes = (TextView) view.findViewById(R.id.whatItDoes);
-            whatItDoes.setText("It feels Lonely in here! :( Add a class ");
-        }
-        String[] val;
-        val=dbsHandler.getAllClassesA();
-        for(int i=0;i<val.length;i++){
-            list.add(val[i]);
-        }
-        CustomListAdapter adapter = new CustomListAdapter(list, getActivity(),1);
-
-        //handle listview and assign adapter
-        ListView lView = (ListView) view.findViewById(R.id.listView);
-        lView.setAdapter(adapter);
-        //Toast.makeText(ClassList.this,val[0]+"loves"+val[1],Toast.LENGTH_SHORT).show();
-
-        /*ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, val);
-        sessionListView.setAdapter(adapter);
-
-        // ListView Item Click Listener
-        sessionListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-
-                // ListView Clicked item index
-                int itemPosition = position;
-
-                // ListView Clicked item value
-                String itemValue = (String) sessionListView.getItemAtPosition(position);
-                Intent intent = new Intent(getActivity(), Attend.class);
-                intent.putExtra("nameOfClass", itemValue);
-                startActivity(intent);
-            }
-
-        });*/
-        return view;
+        return inflater.inflate(R.layout.fragment_about_us, container, false);
     }
-
-
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -149,7 +96,7 @@ public class ClassList extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p>
+     * <p/>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.

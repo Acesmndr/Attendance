@@ -1,13 +1,11 @@
 package com.example.acesmndr.attendance;
 
 import android.app.AlertDialog;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -176,8 +174,6 @@ public class CustomListAdapter extends BaseAdapter implements ListAdapter {
         // get the state of your external storage
         String state = Environment.getExternalStorageState();
         if (Environment.MEDIA_MOUNTED.equals(state)) {
-            // if storage is mounted return true
-            Log.v("sTag", "Yes, can write to external storage.");
             return true;
         }
         return false;

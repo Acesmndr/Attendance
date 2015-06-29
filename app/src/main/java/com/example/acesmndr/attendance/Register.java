@@ -1,8 +1,8 @@
 package com.example.acesmndr.attendance;
 
 import android.graphics.Color;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,14 +25,15 @@ public class Register extends ActionBarActivity {
         MyDBHandler dbHandler=new MyDBHandler(this,null,null,1);
         String[][] data=dbHandler.registerShow(getIntent().getExtras().getString("nameOfClass"));
         Toast.makeText(this,getIntent().getExtras().getString("nameOfClass"),Toast.LENGTH_LONG).show();
-        int[] totalAttendance=new int[data.length];
+        int[] totalAttendance=getAttendanceCount(getIntent().getExtras().getString("nameOfClass"));
+        /*int[] totalAttendance=new int[data.length];
         totalAttendance[0]=0;
         for(int i=1;i<data.length;i++){
             totalAttendance[i]=0;
             for(int j=0;j<data[0].length;j++){
                 totalAttendance[i]+=Integer.parseInt(data[i][j]);
             }
-        }
+        }*/
 
         mainTable=(TableLayout) findViewById(R.id.mainTable);
 
@@ -142,7 +143,7 @@ public class Register extends ActionBarActivity {
                     final TextView test_name = new TextView(this);
                     test_name.setPadding(5, 5, 5, 5);
                     test_name.setBackgroundResource(R.drawable.cell_shape);
-                    test_name.setText(Integer.toString(totalAttendance[i]));
+                    test_name.setText(Integer.toString(totalAttendance[i-1]));
                     test_name.setTextColor(Color.WHITE);
                     rowData.addView(test_name);// add the column to the table row here
                 }
@@ -156,7 +157,10 @@ public class Register extends ActionBarActivity {
 
         }
     }
-
+    public int[] getAttendanceCount(String nameOfClass){
+        MyDBHandler dbHandler=new MyDBHandler(this,null,null,1);
+        return dbHandler.totalAttendance(nameOfClass);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

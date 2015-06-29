@@ -3,14 +3,13 @@ package com.example.acesmndr.attendance;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -190,7 +189,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
         Session session=findSession(tableName);
         //Date Dtoday=new Date();
         SQLiteDatabase db=getWritableDatabase();
-        String query_open="INSERT INTO class"+session.getID()+" VALUES('"+System.currentTimeMillis()+"'"; //if not exists add  one
+        String query_open="INSERT INTO class"+session.getID()+" VALUES('"+System.currentTimeMillis()%1000000000+"'"; //if not exists add  one
         for(int i=0;i<session.getNoS();i++){
             query_open+=",1";
         }
@@ -198,16 +197,33 @@ public class MyDBHandler extends SQLiteOpenHelper{
         db.execSQL(query_open);
         db.close();
     }
+    public int[] totalAttendance(String tableName){
+        Session session=findSession(tableName);
+        int[] count=new int[session.getNoS()];
+        SQLiteDatabase db=getReadableDatabase();
+        String query="SELECT * FROM class"+session.getID();
+        Cursor cursor=db.rawQuery(query, null);
+        while(cursor.moveToNext()){
+            for(int j=1;j<cursor.getColumnCount();j++) { // columnCount-1 for one of column is date
+                count[j-1]+=cursor.getInt(j);
+            }
+        }
+        return count;
+
+    }
     public String[][] dataToExport(String tableName,int rollStart){
+        int[] count=totalAttendance(tableName);
         Session session=findSession(tableName);
         SQLiteDatabase db=getReadableDatabase();
         String query="SELECT * FROM class"+session.getID();
         Cursor cursor=db.rawQuery(query, null);
-        String[][] register=new String[cursor.getColumnCount()][cursor.getCount()+1];
+        String[][] register=new String[cursor.getColumnCount()][cursor.getCount()+2];
         if (cursor != null) {
                 register[0][0]=" ";
+                register[0][cursor.getCount()+1]="Total";
             for(int k=0;k<cursor.getColumnCount()-1;k++){
                 register[k+1][0]=Integer.toString(rollStart+k);
+                register[k+1][cursor.getCount()+1]=Integer.toString(count[k]);
             }
             int i = 1;
             while(cursor.moveToNext()){
@@ -227,10 +243,14 @@ public class MyDBHandler extends SQLiteOpenHelper{
         SQLiteDatabase db=getReadableDatabase();
         String query="SELECT * FROM class"+session.getID();
         Cursor cursor=db.rawQuery(query,null);
-        String[][] register=new String[cursor.getColumnCount()][cursor.getCount()];
+        int noOfDays=cursor.getCount();
+        if(noOfDays>6)
+            noOfDays=6;
+        String[][] register=new String[cursor.getColumnCount()][noOfDays];
         if (cursor != null) {
             int i = 0;
-            while(cursor.moveToNext()){
+            while(i<noOfDays){
+                cursor.moveToNext();
                 register[0][i]=cursor.getString(0);
                 for(int j=1;j<cursor.getColumnCount();j++) { // columnCount-1 for one of column is date
                     register[j][i] = Integer.toString(cursor.getInt(j));

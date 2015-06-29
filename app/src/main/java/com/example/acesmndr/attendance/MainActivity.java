@@ -2,21 +2,21 @@ package com.example.acesmndr.attendance;
 
 import android.app.Activity;
 import android.net.Uri;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
 
 
 public class MainActivity extends ActionBarActivity
-        implements AddClass.OnFragmentInteractionListener,ClassList.OnFragmentInteractionListener,RegisterList.OnFragmentInteractionListener, NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements AddClass.OnFragmentInteractionListener,ClassList.OnFragmentInteractionListener,RegisterList.OnFragmentInteractionListener,AboutUs.OnFragmentInteractionListener, NavigationDrawerFragment.NavigationDrawerCallbacks {
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -62,7 +62,7 @@ public class MainActivity extends ActionBarActivity
             fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
         }
         if(position==3) {
-            fragment = new RegisterList();
+            fragment = new AboutUs();
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
         }

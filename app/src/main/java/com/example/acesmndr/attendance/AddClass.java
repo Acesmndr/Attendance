@@ -1,14 +1,10 @@
 package com.example.acesmndr.attendance;
 
 import android.app.Activity;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +13,6 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.File;
 
 
 /**
@@ -158,7 +152,6 @@ public class AddClass extends Fragment {
     public void lookUpSession(View view){
         MyDBHandler dbHandler=new MyDBHandler(getActivity(),null,null,1);
         Session session=dbHandler.findSession(nameOfClassX.getText().toString());
-        Log.d("Aces", nameOfClassX.getText().toString());
         if(session != null){
             rollStartX.setText(String.valueOf(session.getRollStart()));
             noSX.setProgress(Integer.parseInt(String.valueOf(session.getNoS())));
