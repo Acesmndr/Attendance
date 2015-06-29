@@ -7,15 +7,13 @@
     tools:context="com.example.acesmndr.attendance.Attend">
 
     <SeekBar
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/seekBar2"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="137dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_marginBottom="114dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -23,20 +21,34 @@
         android:text="68002"
         android:id="@+id/rollDisplay"
         android:textSize="100sp"
-        android:layout_marginBottom="81dp"
-        android:layout_above="@+id/seekBar2"
+        android:layout_marginTop="105dp"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
+    <LinearLayout android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp">
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:text="Present"
         android:id="@+id/present"
+        android:textSize="35sp"
+        android:background="#0091EA"
+        android:textColor="@android:color/white"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="58dp"
-        android:textSize="35sp" />
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -44,10 +56,19 @@
         android:text="Absent"
         android:id="@+id/absent"
         android:textSize="35sp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/present"
-        android:layout_toRightOf="@+id/present"
-        android:layout_toEndOf="@+id/present" />
+        android:textColor="@android:color/white"
+        android:background="#D32F2F"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:layout_weight="1"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/seekBar2"
+        android:layout_alignEnd="@+id/seekBar2"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp" />
+    </LinearLayout>
+
 
 </RelativeLayout>

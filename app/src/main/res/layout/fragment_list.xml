@@ -2,22 +2,32 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" tools:context="com.example.acesmndr.attendance.ClassList">
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="462dp"
-        android:id="@+id/listView"
-        android:layout_gravity="center_horizontal|bottom"
-        android:background="@android:color/white" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="41dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="My Class List"
-        android:id="@+id/whatItDoes"
-        android:layout_gravity="top|left|center_vertical"
-        android:textColor="@android:color/darker_gray"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp" />
+
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="left|top">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="41dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="My Class List"
+            android:id="@+id/whatItDoes"
+            android:layout_gravity="top|left|center_vertical"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp" />
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/listView"
+            android:layout_gravity="center_horizontal|bottom"
+            android:background="@android:color/white" />
+
+    </LinearLayout>
 
 </FrameLayout>

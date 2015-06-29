@@ -105,7 +105,7 @@ public class ClassList extends Fragment {
             /*String data = "latitude,longitude,HQ_NAME\n" +
                     "29.97531509,81.81872559,Simikot\n" +
                     "29.84737968,80.57302856,Darchula";*/
-            String data=writeExternal();
+            String data="aces";//writeExternal();
             try {
                 os.write(data.getBytes());
                 os.close();
