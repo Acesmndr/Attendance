@@ -91,30 +91,6 @@ public class ClassList extends Fragment {
         //handle listview and assign adapter
         ListView lView = (ListView) view.findViewById(R.id.listView);
         lView.setAdapter(adapter);
-        //Toast.makeText(ClassList.this,val[0]+"loves"+val[1],Toast.LENGTH_SHORT).show();
-
-        /*ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, val);
-        sessionListView.setAdapter(adapter);
-
-        // ListView Item Click Listener
-        sessionListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-
-                // ListView Clicked item index
-                int itemPosition = position;
-
-                // ListView Clicked item value
-                String itemValue = (String) sessionListView.getItemAtPosition(position);
-                Intent intent = new Intent(getActivity(), Attend.class);
-                intent.putExtra("nameOfClass", itemValue);
-                startActivity(intent);
-            }
-
-        });*/
         return view;
     }
 

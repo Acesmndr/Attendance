@@ -93,7 +93,7 @@
         android:layout_height="wrap_content"
         android:text="ADD"
         android:id="@+id/addButton"
-        android:background="#00E676"
+        android:background="#0091EA"
         android:textColor="@android:color/white"
         android:layout_below="@+id/seekBar"
         android:layout_toLeftOf="@+id/cancelButton"

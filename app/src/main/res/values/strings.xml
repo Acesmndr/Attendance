@@ -10,7 +10,7 @@
 
     <string name="action_example">Example action</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Report a Bug</string>
     <string name="name_of_class">Class:</string>
     <string name="roll_start">Starts from no:</string>
     <string name="no_of_students">No Of Students:</string>

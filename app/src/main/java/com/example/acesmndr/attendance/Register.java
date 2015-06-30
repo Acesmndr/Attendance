@@ -1,5 +1,6 @@
 package com.example.acesmndr.attendance;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -9,7 +10,6 @@ import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 public class Register extends ActionBarActivity {
@@ -24,17 +24,9 @@ public class Register extends ActionBarActivity {
         setContentView(R.layout.activity_register);
         MyDBHandler dbHandler=new MyDBHandler(this,null,null,1);
         String[][] data=dbHandler.registerShow(getIntent().getExtras().getString("nameOfClass"));
-        Toast.makeText(this,getIntent().getExtras().getString("nameOfClass"),Toast.LENGTH_LONG).show();
+        //Toast.makeText(this,getIntent().getExtras().getString("nameOfClass"),Toast.LENGTH_LONG).show();
+        setTitle(getIntent().getExtras().getString("nameOfClass"));
         int[] totalAttendance=getAttendanceCount(getIntent().getExtras().getString("nameOfClass"));
-        /*int[] totalAttendance=new int[data.length];
-        totalAttendance[0]=0;
-        for(int i=1;i<data.length;i++){
-            totalAttendance[i]=0;
-            for(int j=0;j<data[0].length;j++){
-                totalAttendance[i]+=Integer.parseInt(data[i][j]);
-            }
-        }*/
-
         mainTable=(TableLayout) findViewById(R.id.mainTable);
 
         //---------------Serial no Table Header-----------------------------------------------
@@ -165,6 +157,7 @@ public class Register extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_register, menu);
+
         return true;
     }
 
@@ -177,7 +170,12 @@ public class Register extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+                    Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.setType("text/html");
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "Attendance v2.0.0:Bug Report");
+                    intent.putExtra(Intent.EXTRA_EMAIL,new String[]{"a4developers@gmail.com"});
+                    this.startActivity(Intent.createChooser(intent, "Report a Bug via Email"));
+                    return true;
         }
 
         return super.onOptionsItemSelected(item);

@@ -29,7 +29,7 @@ public class AddClass extends Fragment {
     EditText rollStartX;
     SeekBar noSX;
     TextView noSDisplayX;
-    Button addButton,list;
+    Button addButton,cancelButton;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -79,24 +79,29 @@ public class AddClass extends Fragment {
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_add_class,container,false);
         // Inflate the layout for this fragment
-        Toast.makeText(getActivity(),"Hello",Toast.LENGTH_SHORT).show();
         nameOfClassX= (EditText) view.findViewById(R.id.editText);
         rollStartX = (EditText) view.findViewById(R.id.editText2);
         noSX = (SeekBar) view.findViewById(R.id.seekBar);
         noSDisplayX = (TextView) view.findViewById(R.id.textView4);
         addButton= (Button) view.findViewById(R.id.addButton);
-        list= (Button) view.findViewById(R.id.cancelButton);
-        list.setOnClickListener(new View.OnClickListener() {
+        cancelButton= (Button) view.findViewById(R.id.cancelButton);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyDBHandler dbHandler=new MyDBHandler(getActivity(),null,null,1);
-                dbHandler.addRandom(nameOfClassX.getText().toString());
+                nameOfClassX.setText("");
+                rollStartX.setText("1");
+                noSX.setProgress(44);
+                noSDisplayX.setText("44");
             }
         });
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                newSession(v);
+                if(nameOfClassX.getText().toString().trim().length()>0){
+                    newSession(v);
+                }else{
+                    Toast.makeText(getActivity(),"Please enter a class name",Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
@@ -133,23 +138,19 @@ public class AddClass extends Fragment {
     }
 
     public void newSession(View view){
-        //Toast.makeText(getActivity(),"Aces loves sima",Toast.LENGTH_LONG).show();
         MyDBHandler dbHandler=new MyDBHandler(getActivity(),null,null,1);
-        Session session=new Session( nameOfClassX.getText().toString(),Integer.parseInt(rollStartX.getText().toString()),noSX.getProgress());
+        Session session=new Session( nameOfClassX.getText().toString().trim(),Integer.parseInt(rollStartX.getText().toString()),noSX.getProgress());
         boolean check=dbHandler.addSession(session);
         if(check==true){
             Intent intent=new Intent(getActivity(),Attend.class);
-            intent.putExtra("nameOfClass",nameOfClassX.getText().toString());
+            intent.putExtra("nameOfClass",nameOfClassX.getText().toString().trim());
             startActivity(intent);
             return;
         }
         Toast.makeText(getActivity(), "Class already exists! Try with a different Name", Toast.LENGTH_LONG).show();
         nameOfClassX.setText("");
-        rollStartX.setText("1");
-        noSX.setProgress(44);
-        noSDisplayX.setText("44");
     }
-    public void lookUpSession(View view){
+    /*public void lookUpSession(View view){
         MyDBHandler dbHandler=new MyDBHandler(getActivity(),null,null,1);
         Session session=dbHandler.findSession(nameOfClassX.getText().toString());
         if(session != null){
@@ -168,7 +169,7 @@ public class AddClass extends Fragment {
         }else{
             nameOfClassX.setText("No Match Found");
         }
-    }
+    }*/
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

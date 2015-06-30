@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -139,7 +138,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
     }
     public void createClassTable(Session session){
         SQLiteDatabase db=getWritableDatabase();
-        String query_create="CREATE TABLE class"+session.getID()+" (dateToday VARCHAR NOT NULL";
+        String query_create="CREATE TABLE class"+session.getID()+" (id INTEGER PRIMARY KEY AUTOINCREMENT,dateToday VARCHAR NOT NULL";
         for(int i=0;i<session.getNoS();i++){
             query_create+=" ,s"+i+" BOOLEAN NOT NULL ";
         }
@@ -157,7 +156,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
             return;
         }
         cursor.close();
-        query_open="INSERT INTO class"+session.getID()+" VALUES('"+getDate()+"'"; //if not exists add  one
+        query_open="INSERT INTO class"+session.getID()+" VALUES(NULL,'"+getDate()+"'"; //if not exists add  one
         for(int i=0;i<session.getNoS();i++){
             query_open+=",0";
         }
@@ -189,7 +188,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
         Session session=findSession(tableName);
         //Date Dtoday=new Date();
         SQLiteDatabase db=getWritableDatabase();
-        String query_open="INSERT INTO class"+session.getID()+" VALUES('"+System.currentTimeMillis()%1000000000+"'"; //if not exists add  one
+        String query_open="INSERT INTO class"+session.getID()+" VALUES(NULL,'"+System.currentTimeMillis()%1000000000+"'"; //if not exists add  one
         for(int i=0;i<session.getNoS();i++){
             query_open+=",1";
         }
@@ -204,8 +203,8 @@ public class MyDBHandler extends SQLiteOpenHelper{
         String query="SELECT * FROM class"+session.getID();
         Cursor cursor=db.rawQuery(query, null);
         while(cursor.moveToNext()){
-            for(int j=1;j<cursor.getColumnCount();j++) { // columnCount-1 for one of column is date
-                count[j-1]+=cursor.getInt(j);
+            for(int j=2;j<cursor.getColumnCount();j++) { // columnCount-1 for one of column is date
+                count[j-2]+=cursor.getInt(j);
             }
         }
         return count;
@@ -217,19 +216,21 @@ public class MyDBHandler extends SQLiteOpenHelper{
         SQLiteDatabase db=getReadableDatabase();
         String query="SELECT * FROM class"+session.getID();
         Cursor cursor=db.rawQuery(query, null);
-        String[][] register=new String[cursor.getColumnCount()][cursor.getCount()+2];
+        int dbDays=cursor.getCount();
+        int dbColumn=cursor.getColumnCount();
+        String[][] register=new String[dbColumn-1][dbDays+2];
         if (cursor != null) {
                 register[0][0]=" ";
-                register[0][cursor.getCount()+1]="Total";
-            for(int k=0;k<cursor.getColumnCount()-1;k++){
+                register[0][dbDays+1]="Total";
+            for(int k=0;k<dbColumn-2;k++){
                 register[k+1][0]=Integer.toString(rollStart+k);
-                register[k+1][cursor.getCount()+1]=Integer.toString(count[k]);
+                register[k+1][dbDays+1]=Integer.toString(count[k]);
             }
             int i = 1;
             while(cursor.moveToNext()){
-                register[0][i]=cursor.getString(0);
-                for(int j=1;j<cursor.getColumnCount();j++) { // columnCount-1 for one of column is date
-                    register[j][i] = Integer.toString(cursor.getInt(j));
+                register[0][i]=cursor.getString(1);
+                for(int j=1;j<dbColumn-1;j++) { // columnCount-1 for one of column is date
+                    register[j][i] = cursor.getString(j + 1);
                     }
                 i++;
                 }
@@ -241,19 +242,20 @@ public class MyDBHandler extends SQLiteOpenHelper{
     public String[][] registerShow(String tableName){
         Session session=findSession(tableName);
         SQLiteDatabase db=getReadableDatabase();
-        String query="SELECT * FROM class"+session.getID();
+        String query="SELECT * FROM class"+session.getID()+" ORDER BY id DESC";
         Cursor cursor=db.rawQuery(query,null);
-        int noOfDays=cursor.getCount();
-        if(noOfDays>6)
-            noOfDays=6;
-        String[][] register=new String[cursor.getColumnCount()][noOfDays];
+        int dbDays=cursor.getCount();
+        int dbStudents=cursor.getColumnCount();
+        if(dbDays>6)
+            dbDays=6;
+        String[][] register=new String[dbStudents-1][dbDays];
         if (cursor != null) {
             int i = 0;
-            while(i<noOfDays){
+            while(i<dbDays){
                 cursor.moveToNext();
-                register[0][i]=cursor.getString(0);
-                for(int j=1;j<cursor.getColumnCount();j++) { // columnCount-1 for one of column is date
-                    register[j][i] = Integer.toString(cursor.getInt(j));
+                register[0][i]=cursor.getString(1);
+                for(int j=2;j<dbStudents;j++) { // columnCount-1 for one of column is date
+                    register[j-1][i] = cursor.getString(j);
                 }
                 i++;
             }

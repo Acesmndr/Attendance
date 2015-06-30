@@ -28,16 +28,12 @@ public class Attend extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attend);
-        //Toast.makeText(Attend.this, getIntent().getExtras().getString("className"), Toast.LENGTH_SHORT).show();
         Session session=getCurrentSession(getIntent().getExtras().getString("nameOfClass"));
         currentTable=session.getClassName();
         initiate();
         setTitle(currentTable);
         roll=session.getRollStart();
         noS=session.getNoS();
-        /*Date Dtoday=new Date();
-        SimpleDateFormat df=new SimpleDateFormat("MMM d");
-        Toast.makeText(this,df.format(Dtoday),Toast.LENGTH_SHORT).show();*/
         rollDisplay= (TextView) findViewById(R.id.rollDisplay);
         present= (Button) findViewById(R.id.present);
         absent= (Button) findViewById(R.id.absent);
@@ -133,6 +129,11 @@ public class Attend extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/html");
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Attendance v2.0.0:Bug Report");
+            intent.putExtra(Intent.EXTRA_EMAIL,new String[]{"a4developers@gmail.com"});
+            this.startActivity(Intent.createChooser(intent, "Report a Bug via Email"));
             return true;
         }
 

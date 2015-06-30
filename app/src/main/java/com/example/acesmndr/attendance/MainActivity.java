@@ -1,6 +1,7 @@
 package com.example.acesmndr.attendance;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -123,6 +124,11 @@ public class MainActivity extends ActionBarActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/html");
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Attendance v2.0.0:Bug Report");
+            intent.putExtra(Intent.EXTRA_EMAIL,new String[]{"a4developers@gmail.com"});
+            this.startActivity(Intent.createChooser(intent, "Report a Bug via Email"));
             return true;
         }
 
