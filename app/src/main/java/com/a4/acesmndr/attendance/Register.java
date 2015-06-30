@@ -1,4 +1,4 @@
-package com.example.acesmndr.attendance;
+package com.a4.acesmndr.attendance;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -24,6 +24,8 @@ public class Register extends ActionBarActivity {
         setContentView(R.layout.activity_register);
         MyDBHandler dbHandler=new MyDBHandler(this,null,null,1);
         String[][] data=dbHandler.registerShow(getIntent().getExtras().getString("nameOfClass"));
+        Session session=dbHandler.findSession(getIntent().getExtras().getString("nameOfClass"));
+        int rollListIndex=session.getRollStart();
         //Toast.makeText(this,getIntent().getExtras().getString("nameOfClass"),Toast.LENGTH_LONG).show();
         setTitle(getIntent().getExtras().getString("nameOfClass"));
         int[] totalAttendance=getAttendanceCount(getIntent().getExtras().getString("nameOfClass"));
@@ -96,7 +98,7 @@ public class Register extends ActionBarActivity {
                     TableLayout.LayoutParams.WRAP_CONTENT));
 
             final TextView rollNo = new TextView(this);
-            rollNo.setText(""+i);
+            rollNo.setText(Integer.toString(rollListIndex++));
             rollNo.setTextColor(Color.WHITE);
             rollNo.setBackgroundResource(R.drawable.cell_shape);
             rollNo.setPadding(5,5,5,5);

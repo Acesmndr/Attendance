@@ -5,11 +5,11 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
-        applicationId "com.example.acesmndr.attendance"
+        applicationId "com.a4.acesmndr.attendance"
         minSdkVersion 10
         targetSdkVersion 22
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "2.0.0"
     }
     buildTypes {
         release {

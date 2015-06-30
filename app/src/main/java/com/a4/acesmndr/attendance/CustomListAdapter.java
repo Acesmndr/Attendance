@@ -1,4 +1,4 @@
-package com.example.acesmndr.attendance;
+package com.a4.acesmndr.attendance;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -118,57 +118,61 @@ public class CustomListAdapter extends BaseAdapter implements ListAdapter {
 
 
                 } else {
-                    if (canWriteOnExternalStorage()) {
-                        // get the path to sdcard
-                        File sdcard = Environment.getExternalStorageDirectory();
-                        File dir = new File(sdcard.getAbsolutePath() + "/Download/");// to this path add a new directory path
-                        dir.mkdir();// create this directory if not already created
-                        File file = new File(dir, getItem(position).toString() + ".csv");// create the file in which we will write the contents
-                        FileOutputStream os = null;
-                        try {
-                            os = new FileOutputStream(file);
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                        String data = writeExternal(getItem(position).toString());
-                        try {
-                            os.write(data.getBytes());
-                            os.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        AlertDialog.Builder builder=new AlertDialog.Builder(context);
-                        builder.setMessage(getItem(position).toString()+" CSV File Exported!\nDo you want to Email the file?")
-                                .setCancelable(true)
-                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.cancel();
-                                    }
-                                })
-                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        Intent intent = new Intent(Intent.ACTION_SEND);
-                                        intent.setType("text/html");
-                                        intent.putExtra(Intent.EXTRA_SUBJECT, "Attendance Register of "+getItem(position).toString());
-                                        intent.putExtra(Intent.EXTRA_TEXT, "attendance v2.0.0 beta \n A4 Developers");
-                                        File root = Environment.getExternalStorageDirectory();
-                                        File file = new File(root, "/Download/"+getItem(position).toString()+".csv");
-                                        if (!file.exists() || !file.canRead()) {
-                                            Toast.makeText(context, "Attachment Error", Toast.LENGTH_SHORT).show();
-                                            return;
+                    if(noOfDataEntry(getItem(position).toString())==0){
+                        Toast.makeText(context,"Register is empty!",Toast.LENGTH_LONG).show();
+                    }else {
+                        if (canWriteOnExternalStorage()) {
+                            // get the path to sdcard
+                            File sdcard = Environment.getExternalStorageDirectory();
+                            File dir = new File(sdcard.getAbsolutePath() + "/Download/");// to this path add a new directory path
+                            dir.mkdir();// create this directory if not already created
+                            File file = new File(dir, getItem(position).toString() + ".csv");// create the file in which we will write the contents
+                            FileOutputStream os = null;
+                            try {
+                                os = new FileOutputStream(file);
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            }
+                            String data = writeExternal(getItem(position).toString());
+                            try {
+                                os.write(data.getBytes());
+                                os.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setMessage(getItem(position).toString() + " CSV File Exported!\nDo you want to Email the file?")
+                                    .setCancelable(true)
+                                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.cancel();
                                         }
-                                        Uri uri = Uri.parse("file://" + file.getAbsolutePath());
-                                        intent.putExtra(Intent.EXTRA_STREAM, uri);
-                                        context.startActivity(Intent.createChooser(intent, "Send via Email"));
-                                    }
-                                });
-                        AlertDialog alertDialog=builder.create();
-                        alertDialog.show();
+                                    })
+                                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Intent intent = new Intent(Intent.ACTION_SEND);
+                                            intent.setType("text/html");
+                                            intent.putExtra(Intent.EXTRA_SUBJECT, "Attendance Register of " + getItem(position).toString());
+                                            intent.putExtra(Intent.EXTRA_TEXT, "attendance v2.0.0 beta \n A4 Developers");
+                                            File root = Environment.getExternalStorageDirectory();
+                                            File file = new File(root, "/Download/" + getItem(position).toString() + ".csv");
+                                            if (!file.exists() || !file.canRead()) {
+                                                Toast.makeText(context, "Attachment Error", Toast.LENGTH_SHORT).show();
+                                                return;
+                                            }
+                                            Uri uri = Uri.parse("file://" + file.getAbsolutePath());
+                                            intent.putExtra(Intent.EXTRA_STREAM, uri);
+                                            context.startActivity(Intent.createChooser(intent, "Send via Email"));
+                                        }
+                                    });
+                            AlertDialog alertDialog = builder.create();
+                            alertDialog.show();
 
 
                         }
+                    }
                     }
             }
         });
@@ -185,7 +189,7 @@ public class CustomListAdapter extends BaseAdapter implements ListAdapter {
 
     public String writeExternal(String nameOfClass){
         MyDBHandler dbHandler=new MyDBHandler(context,null,null,1);
-        String[][] data=dbHandler.dataToExport(nameOfClass,68002);
+        String[][] data=dbHandler.dataToExport(nameOfClass);
         String toPrint=nameOfClass+"\nAttendance v2.0.0 Beta\n\n";
         for(int i=0;i<data.length;i++ ){
             for(int j=0;j<data[0].length;j++){

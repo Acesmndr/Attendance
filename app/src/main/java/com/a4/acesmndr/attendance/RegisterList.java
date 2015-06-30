@@ -1,26 +1,30 @@
-package com.example.acesmndr.attendance;
+package com.a4.acesmndr.attendance;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link AboutUs.OnFragmentInteractionListener} interface
+ * {@link RegisterList.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link AboutUs#newInstance} factory method to
+ * Use the {@link RegisterList#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AboutUs extends Fragment {
-    Button queries;
+public class RegisterList extends Fragment {
+    ArrayList<Session> Sessions = new ArrayList<Session>();
+    ListView sessionListView;
+    MyDBHandler dbsHandler;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -38,11 +42,11 @@ public class AboutUs extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment AboutUs.
+     * @return A new instance of fragment RegisterList.
      */
     // TODO: Rename and change types and number of parameters
-    public static AboutUs newInstance(String param1, String param2) {
-        AboutUs fragment = new AboutUs();
+    public static RegisterList newInstance(String param1, String param2) {
+        RegisterList fragment = new RegisterList();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -50,7 +54,7 @@ public class AboutUs extends Fragment {
         return fragment;
     }
 
-    public AboutUs() {
+    public RegisterList() {
         // Required empty public constructor
     }
 
@@ -66,18 +70,19 @@ public class AboutUs extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_about_us, container, false);
-        queries= (Button) view.findViewById(R.id.queries);
-        queries.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/html");
-                intent.putExtra(Intent.EXTRA_SUBJECT, "Attendance v2.0.0:Suggestion and Queries");
-                intent.putExtra(Intent.EXTRA_EMAIL,new String[]{"a4developers@gmail.com"});
-                getActivity().startActivity(Intent.createChooser(intent, "Suggest or Report Problem via Email"));
-            }
-        });
+        // Inflate the layout for this fragment
+        View view=inflater.inflate(R.layout.fragment_list, container, false);
+        ArrayList<String> list = new ArrayList<String>();
+        dbsHandler=new MyDBHandler(getActivity(),null,null,1);
+        TextView whatItDoes= (TextView) view.findViewById(R.id.whatItDoes);
+        whatItDoes.setText("Select a class:");
+        String[] val=dbsHandler.getAllClassesA();
+        for(int i=0;i<val.length;i++){
+            list.add(val[i]);
+        }
+        CustomListAdapter adapter = new CustomListAdapter(list, getActivity(),0);
+ListView lView = (ListView) view.findViewById(R.id.listView);
+        lView.setAdapter(adapter);
         return view;
     }
 

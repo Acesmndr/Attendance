@@ -4,7 +4,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.acesmndr.attendance.Register">
+    tools:context="com.a4.acesmndr.attendance.Register">
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -42,8 +42,7 @@
                     android:id="@+id/horizontalScrollView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/relativeLayout1" >
+                    android:layout_alignParentTop="true">
 
                     <TableLayout
                         android:id="@+id/dataTable"

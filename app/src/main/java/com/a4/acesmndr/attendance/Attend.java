@@ -1,4 +1,4 @@
-package com.example.acesmndr.attendance;
+package com.a4.acesmndr.attendance;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -92,11 +92,12 @@ public class Attend extends ActionBarActivity {
         Vibrator vibrator= (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(150);
         if(progress==(noS-1)){
+            int presentCount=getTotalPresent();
             NotificationManager notificationManager= (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            Notification notification=new Notification(R.drawable.abc_ic_menu_paste_mtrl_am_alpha,"Attendance Completed",System.currentTimeMillis());
+            Notification notification=new Notification(R.drawable.abc_ic_menu_paste_mtrl_am_alpha,"Attendance Completed:"+presentCount+"/"+noS,System.currentTimeMillis());
             Context context=Attend.this;
             CharSequence title="Attendance complete";
-            CharSequence details=currentTable;
+            CharSequence details=presentCount+" out of "+noS+" are Present";
             Intent intent=new Intent(context,MainActivity.class);
             PendingIntent pendingIntent=PendingIntent.getActivity(context,0,intent,0);
             notification.setLatestEventInfo(context,title,details,pendingIntent);
@@ -115,6 +116,10 @@ public class Attend extends ActionBarActivity {
         MyDBHandler dbHandler=new MyDBHandler(Attend.this,null,null,1);
         dbHandler.absentdb(currentTable, sId);
 
+    }
+    public int getTotalPresent(){
+        MyDBHandler dbHandler=new MyDBHandler(Attend.this,null,null,1);
+        return dbHandler.getPresentTotal(currentTable);
     }
 
 

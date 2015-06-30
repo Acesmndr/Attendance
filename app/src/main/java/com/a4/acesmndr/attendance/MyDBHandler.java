@@ -1,4 +1,4 @@
-package com.example.acesmndr.attendance;
+package com.a4.acesmndr.attendance;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -220,9 +220,10 @@ public class MyDBHandler extends SQLiteOpenHelper{
         return count;
 
     }
-    public String[][] dataToExport(String tableName,int rollStart){
+    public String[][] dataToExport(String tableName){
         int[] count=totalAttendance(tableName);
         Session session=findSession(tableName);
+        int rollStart=session.getRollStart();
         SQLiteDatabase db=getReadableDatabase();
         String query="SELECT * FROM class"+session.getID();
         Cursor cursor=db.rawQuery(query, null);
@@ -274,6 +275,22 @@ public class MyDBHandler extends SQLiteOpenHelper{
         db.close();
         return register;
     }
+    public int getPresentTotal(String tableName){
+        Session session=findSession(tableName);
+        SQLiteDatabase db=getReadableDatabase();
+        String query="SELECT * FROM class"+session.getID()+" WHERE dateToday='"+getDate()+"'";
+        Cursor cursor=db.rawQuery(query, null);
+        cursor.moveToFirst();
+        int counter=0;
+        for(int i=0;i<cursor.getColumnCount()-2;i++){
+            counter+=cursor.getInt(i+2);
+        }
+        cursor.close();
+        db.close();
+        return counter;
+
+    }
+
 
 
     }
