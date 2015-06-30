@@ -184,6 +184,16 @@ public class MyDBHandler extends SQLiteOpenHelper{
         db.execSQL(query);
         db.close();
     }
+    public int entry(String tableName){
+        Session session=findSession(tableName);
+        SQLiteDatabase db=getWritableDatabase();
+        String query="SELECT * FROM class"+session.getID();
+        Cursor cursor = db.rawQuery(query, null);
+        int counter = cursor.getCount();
+        cursor.close();
+        db.close();
+        return counter;
+    }
     public void addRandom(String tableName){
         Session session=findSession(tableName);
         //Date Dtoday=new Date();

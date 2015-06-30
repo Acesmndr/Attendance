@@ -77,13 +77,17 @@ public class CustomListAdapter extends BaseAdapter implements ListAdapter {
                 Intent intent;
                 if (whichList==1){
                     intent=new Intent(context, Attend.class);
+                    intent.putExtra("nameOfClass", itemValue);
+                    context.startActivity(intent);
                 }else{
-                    intent=new Intent(context, Register.class);
+                    if(noOfDataEntry(itemValue)==0){
+                        Toast.makeText(context,"Register is empty!",Toast.LENGTH_LONG).show();
+                    }else {
+                        intent = new Intent(context, Register.class);
+                        intent.putExtra("nameOfClass", itemValue);
+                        context.startActivity(intent);
+                    }
                 }
-                intent.putExtra("nameOfClass", itemValue);
-                context.startActivity(intent);
-                //do something
-                //notifyDataSetChanged();
             }
 
         });
@@ -194,5 +198,9 @@ public class CustomListAdapter extends BaseAdapter implements ListAdapter {
             toPrint+="\n";
         }
         return toPrint;
+    }
+    public int noOfDataEntry(String nameOfClass){
+        MyDBHandler dbHandler=new MyDBHandler(context,null,null,1);
+        return dbHandler.entry(nameOfClass);
     }
 }

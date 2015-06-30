@@ -1,6 +1,8 @@
 package com.example.acesmndr.attendance;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -142,9 +144,29 @@ public class AddClass extends Fragment {
         Session session=new Session( nameOfClassX.getText().toString().trim(),Integer.parseInt(rollStartX.getText().toString()),noSX.getProgress());
         boolean check=dbHandler.addSession(session);
         if(check==true){
-            Intent intent=new Intent(getActivity(),Attend.class);
-            intent.putExtra("nameOfClass",nameOfClassX.getText().toString().trim());
-            startActivity(intent);
+            AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+            builder.setMessage("Do you want to add Another Class?")
+                    .setCancelable(true)
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent=new Intent(getActivity(),MainActivity.class);
+                            startActivity(intent);
+                            return;
+                        }
+                    })
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            nameOfClassX.setText("");
+                            rollStartX.setText("1");
+                            noSX.setProgress(44);
+                            noSDisplayX.setText("44");
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alertDialog=builder.create();
+            alertDialog.show();
             return;
         }
         Toast.makeText(getActivity(), "Class already exists! Try with a different Name", Toast.LENGTH_LONG).show();

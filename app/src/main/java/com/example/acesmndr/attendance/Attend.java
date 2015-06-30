@@ -22,6 +22,7 @@ public class Attend extends ActionBarActivity {
     Button present;
     Button absent;
     int roll,noS;
+    boolean virginity=true; //check if today's class has been already added
     String currentTable;
 
     @Override
@@ -30,7 +31,7 @@ public class Attend extends ActionBarActivity {
         setContentView(R.layout.activity_attend);
         Session session=getCurrentSession(getIntent().getExtras().getString("nameOfClass"));
         currentTable=session.getClassName();
-        initiate();
+        //initiate();
         setTitle(currentTable);
         roll=session.getRollStart();
         noS=session.getNoS();
@@ -73,12 +74,16 @@ public class Attend extends ActionBarActivity {
     public void initiate(){
         MyDBHandler dbHandler=new MyDBHandler(Attend.this,null,null,1);
         dbHandler.openClass(currentTable);
+        virginity=false;
     }
     public Session getCurrentSession(String nameOfClass){
         MyDBHandler dbHandler=new MyDBHandler(Attend.this,null,null,1);
         return dbHandler.findSession(nameOfClass);
     }
     public void progress(int ap,int progress){
+        if(virginity==true){
+            initiate();
+        }
         if(ap==0) {
             markAbsent(progress);
         }else{
