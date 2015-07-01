@@ -124,7 +124,7 @@ public class CustomListAdapter extends BaseAdapter implements ListAdapter {
                         if (canWriteOnExternalStorage()) {
                             // get the path to sdcard
                             File sdcard = Environment.getExternalStorageDirectory();
-                            File dir = new File(sdcard.getAbsolutePath() + "/Download/");// to this path add a new directory path
+                            File dir = new File(sdcard.getAbsolutePath() + "/Download/Attendance/");// to this path add a new directory path
                             dir.mkdir();// create this directory if not already created
                             File file = new File(dir, getItem(position).toString() + ".csv");// create the file in which we will write the contents
                             FileOutputStream os = null;
@@ -141,7 +141,7 @@ public class CustomListAdapter extends BaseAdapter implements ListAdapter {
                                 e.printStackTrace();
                             }
                             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                            builder.setMessage(getItem(position).toString() + " CSV File Exported!\nDo you want to Email the file?")
+                            builder.setMessage(getItem(position).toString() + " CSV File Exported to Internal Storage/Download/Attendance !\nDo you want to Email the file?")
                                     .setCancelable(true)
                                     .setNegativeButton("No", new DialogInterface.OnClickListener() {
                                         @Override
@@ -155,9 +155,9 @@ public class CustomListAdapter extends BaseAdapter implements ListAdapter {
                                             Intent intent = new Intent(Intent.ACTION_SEND);
                                             intent.setType("text/html");
                                             intent.putExtra(Intent.EXTRA_SUBJECT, "Attendance Register of " + getItem(position).toString());
-                                            intent.putExtra(Intent.EXTRA_TEXT, "attendance v2.0.0 beta \n A4 Developers");
+                                            intent.putExtra(Intent.EXTRA_TEXT, "\n\nAttendance v2.0.0 beta \nhttps://goo.gl/AMs90z\n A4 Developers");
                                             File root = Environment.getExternalStorageDirectory();
-                                            File file = new File(root, "/Download/" + getItem(position).toString() + ".csv");
+                                            File file = new File(root, "/Download/Attendance/" + getItem(position).toString() + ".csv");
                                             if (!file.exists() || !file.canRead()) {
                                                 Toast.makeText(context, "Attachment Error", Toast.LENGTH_SHORT).show();
                                                 return;

@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.CursorIndexOutOfBoundsException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -183,6 +184,24 @@ public class MyDBHandler extends SQLiteOpenHelper{
         String query="UPDATE class"+session.getID()+" SET s"+roll+"=0 WHERE dateToday='"+getDate()+"'";
         db.execSQL(query);
         db.close();
+    }
+    public boolean checkPresence(String tableName,int roll){
+        boolean presence=true;
+        Session session=findSession(tableName);
+        SQLiteDatabase db=getWritableDatabase();
+        String query="SELECT s"+roll+" FROM class"+session.getID()+" WHERE dateToday='"+getDate()+"'";
+        Cursor cursor = db.rawQuery(query, null);
+        try {
+            cursor.moveToFirst();
+            if (cursor.getInt(0) == 0) {
+                presence = false;
+            }
+        }catch (CursorIndexOutOfBoundsException e){
+            presence = false;
+        }
+        cursor.close();
+        db.close();
+        return presence;
     }
     public int entry(String tableName){
         Session session=findSession(tableName);

@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v7.app.ActionBarActivity;
@@ -54,19 +55,24 @@ public class Attend extends ActionBarActivity {
         sb= (SeekBar) findViewById(R.id.seekBar2);
         sb.setMax(noS-1);
         sb.setProgress(0);
+        checkIfPresent(0);
         sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                rollDisplay.setText(Integer.toString(progress+roll));
+                rollDisplay.setText(Integer.toString(progress + roll));
+
+
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
+                rollDisplay.setTextColor(Color.BLACK);
 
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+                checkIfPresent(sb.getProgress());
 
             }
         });
@@ -98,13 +104,15 @@ public class Attend extends ActionBarActivity {
             Context context=Attend.this;
             CharSequence title="Attendance complete";
             CharSequence details=presentCount+" out of "+noS+" are Present";
-            Intent intent=new Intent(context,MainActivity.class);
-            PendingIntent pendingIntent=PendingIntent.getActivity(context,0,intent,0);
+            Intent intent=new Intent(context,Register.class);
+            intent.putExtra("nameOfClass",currentTable);
+            PendingIntent pendingIntent=PendingIntent.getActivity(context,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
             notification.setLatestEventInfo(context,title,details,pendingIntent);
             notificationManager.notify(0, notification);
             vibrator.vibrate(350);
             }
-        sb.setProgress(progress+1);
+        sb.setProgress(progress + 1);
+        checkIfPresent(progress);
     }
     public void markPresent(int sId){
         MyDBHandler dbHandler=new MyDBHandler(Attend.this,null,null,1);
@@ -117,6 +125,15 @@ public class Attend extends ActionBarActivity {
         dbHandler.absentdb(currentTable, sId);
 
     }
+    public void checkIfPresent(int sId){
+        MyDBHandler dbHandler=new MyDBHandler(Attend.this,null,null,1);
+        if(dbHandler.checkPresence(currentTable, sId)){
+            rollDisplay.setTextColor(Color.parseColor("#0091EA"));
+        }else{
+            rollDisplay.setTextColor(Color.BLACK);
+        }
+    }
+
     public int getTotalPresent(){
         MyDBHandler dbHandler=new MyDBHandler(Attend.this,null,null,1);
         return dbHandler.getPresentTotal(currentTable);

@@ -100,7 +100,12 @@ public class AddClass extends Fragment {
             @Override
             public void onClick(View v) {
                 if(nameOfClassX.getText().toString().trim().length()>0){
-                    newSession(v);
+                    if(rollStartX.getText().toString().length()>0){
+                        newSession(v);
+                    }
+                     else{
+                        Toast.makeText(getActivity(),"Starting Roll No Can't be Empty",Toast.LENGTH_SHORT).show();
+                    }
                 }else{
                     Toast.makeText(getActivity(),"Please enter a class name",Toast.LENGTH_SHORT).show();
                 }
@@ -141,7 +146,11 @@ public class AddClass extends Fragment {
 
     public void newSession(View view){
         MyDBHandler dbHandler=new MyDBHandler(getActivity(),null,null,1);
-        Session session=new Session( nameOfClassX.getText().toString().trim(),Integer.parseInt(rollStartX.getText().toString()),noSX.getProgress());
+        int progress=noSX.getProgress();
+        if(progress==0){
+            progress=1;
+        }
+        Session session=new Session( nameOfClassX.getText().toString().trim(),Integer.parseInt(rollStartX.getText().toString()),progress);
         boolean check=dbHandler.addSession(session);
         if(check==true){
             AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
