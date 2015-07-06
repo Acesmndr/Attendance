@@ -110,9 +110,11 @@ public class Attend extends ActionBarActivity {
             notification.setLatestEventInfo(context,title,details,pendingIntent);
             notificationManager.notify(0, notification);
             vibrator.vibrate(350);
-            }
+            checkIfPresent(progress);
+            }else{
+            checkIfPresent(progress + 1);
+        }
         sb.setProgress(progress + 1);
-        checkIfPresent(progress);
     }
     public void markPresent(int sId){
         MyDBHandler dbHandler=new MyDBHandler(Attend.this,null,null,1);
