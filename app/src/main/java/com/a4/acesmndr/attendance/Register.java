@@ -2,8 +2,10 @@ package com.a4.acesmndr.attendance;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,9 +42,9 @@ public class Register extends ActionBarActivity {
 
 
         TextView label_sr_no = new TextView(this);
-        label_sr_no.setText("Date");
+        label_sr_no.setText("Register");
         label_sr_no.setTextColor(Color.WHITE);
-        label_sr_no.setPadding(5,5,5,5);
+        label_sr_no.setPadding(20,10,20,10);
         srno_tr_head.addView(label_sr_no);// add the column to the table row here
         //label_sr_no.setTextSize(20);
 
@@ -67,7 +69,7 @@ public class Register extends ActionBarActivity {
                 TextView label_test_name = new TextView(this);
                 label_test_name.setText(data[0][i]);
                 label_test_name.setTextColor(Color.WHITE);
-                label_test_name.setPadding(5, 5, 5, 5);
+                label_test_name.setPadding(20,10,20,10);
                 //label_test_name.setTextSize(20);
                 report_tr_head.addView(label_test_name);// add the column to the table row here
                  }
@@ -75,7 +77,7 @@ public class Register extends ActionBarActivity {
         TextView label_test_name = new TextView(this);
         label_test_name.setText("Total");
         label_test_name.setTextColor(Color.WHITE);
-        label_test_name.setPadding(5, 5, 5, 5);
+        label_test_name.setPadding(20,10,20,10);
         //label_test_name.setTextSize(20);
         report_tr_head.addView(label_test_name);
 
@@ -101,7 +103,8 @@ public class Register extends ActionBarActivity {
             rollNo.setText(Integer.toString(rollListIndex++));
             rollNo.setTextColor(Color.WHITE);
             rollNo.setBackgroundResource(R.drawable.cell_shape);
-            rollNo.setPadding(5,5,5,5);
+            rollNo.setPadding(30, 10, 30, 10);
+            rollNo.setGravity(Gravity.CENTER_HORIZONTAL);
             overallRowData.addView(rollNo);// add the column to the table row here
 
 
@@ -122,7 +125,6 @@ public class Register extends ActionBarActivity {
             rowData.setLayoutParams(new TableLayout.LayoutParams(
                     TableLayout.LayoutParams.FILL_PARENT,
                     TableLayout.LayoutParams.WRAP_CONTENT));
-
             for(int j=0;j<data[0].length+1;j++) {
                 try {
                     final TextView test_name = new TextView(this);
@@ -131,14 +133,15 @@ public class Register extends ActionBarActivity {
                     } else {
                         test_name.setBackgroundResource(R.drawable.absent_shape);
                     }
-                    test_name.setPadding(5, 5, 5, 5);
+                    test_name.setPadding(20,10,20,10);
                     rowData.addView(test_name);// add the column to the table row here
                 }catch (ArrayIndexOutOfBoundsException e){
                     final TextView test_name = new TextView(this);
-                    test_name.setPadding(5, 5, 5, 5);
+                    test_name.setPadding(20,10,20,10);
                     test_name.setBackgroundResource(R.drawable.cell_shape);
-                    test_name.setText(Integer.toString(totalAttendance[i-1]));
+                    test_name.setText(Integer.toString(totalAttendance[i - 1]));
                     test_name.setTextColor(Color.WHITE);
+                    test_name.setGravity(Gravity.CENTER_HORIZONTAL);
                     rowData.addView(test_name);// add the column to the table row here
                 }
 
@@ -172,8 +175,8 @@ public class Register extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-                    Intent intent = new Intent(Intent.ACTION_SEND);
-                    intent.setType("text/html");
+                    Intent intent = new Intent(Intent.ACTION_SENDTO);
+                    intent.setData(Uri.parse("mailto:"));
                     intent.putExtra(Intent.EXTRA_SUBJECT, "Attendance v2.0.0:Bug Report");
                     intent.putExtra(Intent.EXTRA_EMAIL,new String[]{"a4developers@gmail.com"});
                     this.startActivity(Intent.createChooser(intent, "Report a Bug via Email"));

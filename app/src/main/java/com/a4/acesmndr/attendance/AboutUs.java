@@ -71,8 +71,8 @@ public class AboutUs extends Fragment {
         queries.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/html");
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:"));
                 intent.putExtra(Intent.EXTRA_SUBJECT, "Attendance v2.0.0:Suggestion and Queries");
                 intent.putExtra(Intent.EXTRA_EMAIL,new String[]{"a4developers@gmail.com"});
                 getActivity().startActivity(Intent.createChooser(intent, "Suggest or Report Problem via Email"));

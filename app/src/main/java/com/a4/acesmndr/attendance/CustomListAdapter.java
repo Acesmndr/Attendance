@@ -152,8 +152,8 @@ public class CustomListAdapter extends BaseAdapter implements ListAdapter {
                                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            Intent intent = new Intent(Intent.ACTION_SEND);
-                                            intent.setType("text/html");
+                                            Intent intent = new Intent(Intent.ACTION_SENDTO);
+                                            intent.setData(Uri.parse("mailto:"));
                                             intent.putExtra(Intent.EXTRA_SUBJECT, "Attendance Register of " + getItem(position).toString());
                                             intent.putExtra(Intent.EXTRA_TEXT, "\n\nAttendance v2.0.0 beta \nhttps://goo.gl/AMs90z\n A4 Developers");
                                             File root = Environment.getExternalStorageDirectory();
