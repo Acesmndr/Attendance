@@ -32,6 +32,7 @@ public class AddClass extends Fragment {
     SeekBar noSX;
     TextView noSDisplayX;
     Button addButton,cancelButton;
+    int currentProgress;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -93,7 +94,7 @@ public class AddClass extends Fragment {
                 nameOfClassX.setText("");
                 rollStartX.setText("1");
                 noSX.setProgress(44);
-                noSDisplayX.setText("44");
+                noSDisplayX.setText("Number Of Students: 44");
             }
         });
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -127,7 +128,8 @@ public class AddClass extends Fragment {
         noSX.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                noSDisplayX.setText(progress + "");
+                noSDisplayX.setText("Number of Students: "+progress);
+                currentProgress=progress;
             }
 
             @Override
@@ -137,8 +139,27 @@ public class AddClass extends Fragment {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
+                if(currentProgress==50||currentProgress==100){
+                    AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+                    builder.setMessage("Is the number of Students greater than "+currentProgress+" ?")
+                            .setCancelable(true)
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            })
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    noSX.setMax(currentProgress + 50);
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog alertDialog=builder.create();
+                    alertDialog.show();
+                }
+               }
         });
 
         return view;
@@ -148,7 +169,8 @@ public class AddClass extends Fragment {
         MyDBHandler dbHandler=new MyDBHandler(getActivity(),null,null,1);
         int progress=noSX.getProgress();
         if(progress==0){
-            progress=1;
+            Toast.makeText(getActivity(), "Number of students in a class can't be zero!", Toast.LENGTH_LONG).show();
+            return;
         }
         Session session=new Session( nameOfClassX.getText().toString().trim(),Integer.parseInt(rollStartX.getText().toString()),progress);
         boolean check=dbHandler.addSession(session);

@@ -2,119 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" tools:context="com.a4.acesmndr.attendance.AddClass"
     android:id="@+id/addClass">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/name_of_class"
-        android:id="@+id/textView"
-        android:textColor="#616161"
-        android:textSize="25sp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-         />
-
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText"
-        android:layout_toRightOf="@id/textView"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="15dp"
-        android:layout_alignParentRight="true"
-        android:paddingRight="10dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/roll_start"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/textView"
-        android:layout_marginTop="30dp"
-        android:textColor="#616161"
-        android:textSize="25sp"
-        android:layout_marginLeft="20dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="4"
-        android:id="@+id/editText2"
-        android:text="1"
-        android:textSize="22sp"
-        android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@+id/textView2"
-        android:layout_below="@id/editText"
-        android:layout_marginTop="10dp"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/no_of_students"
-        android:id="@+id/textView3"
-        android:layout_below="@+id/textView2"
-        android:layout_marginTop="25dp"
-        android:textColor="#616161"
-        android:textSize="25sp"
-        android:layout_marginLeft="20dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="44"
-        android:id="@+id/textView4"
-        android:textColor="#616161"
-        android:textSize="25sp"
-        android:layout_toRightOf="@id/textView3"
-        android:layout_below="@id/editText2"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="20dp"/>
-
-    <SeekBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/seekBar"
-        android:progress="44"
-        android:max="50"
-        android:layout_below="@+id/textView3"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp" />
-
-     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ADD"
-        android:id="@+id/addButton"
-        android:background="#0091EA"
-        android:textColor="@android:color/white"
-        android:layout_below="@+id/seekBar"
-        android:layout_toLeftOf="@+id/cancelButton"
-        android:layout_marginRight="20dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:textSize="20sp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cancel"
-        android:id="@+id/cancelButton"
-        android:background="#D32F2F"
-        android:textColor="@android:color/white"
-        android:layout_below="@+id/seekBar"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="20dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:textSize="20sp" />
 
 
     <!--LinearLayout
@@ -122,4 +9,113 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="left|top"></LinearLayout-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:weightSum="1">
+
+        <SurfaceView
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:id="@+id/surfaceView"
+            android:background="@drawable/classroom"
+            android:layout_weight="0.20" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/editText"
+            android:background="@android:color/holo_blue_dark"
+            android:padding="10dp"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:hint="Name of Class"
+            android:textColorHint="@android:color/white"
+            android:layout_marginLeft="5px"
+            android:layout_marginRight="5px"
+            android:layout_marginBottom="0px"
+            android:layout_marginTop="3px" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/editText2"
+            android:textSize="20sp"
+            android:background="@android:color/holo_blue_dark"
+            android:padding="10dp"
+            android:hint="Roll number starts from"
+            android:textColorHint="@android:color/white"
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="5px"
+            android:layout_marginTop="5px"
+            android:layout_marginRight="5px" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Number Of Students: 44"
+            android:id="@+id/textView4"
+            android:layout_margin="5px"
+            android:background="@android:color/holo_blue_dark"
+            android:textSize="20sp"
+            android:padding="10dp"
+            android:textColor="@android:color/white" />
+
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/seekBar"
+            android:padding="10px"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:max="50"
+            android:progress="44" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="77dp"
+            android:rowCount="1"
+            android:columnCount="2">
+
+            <Button
+                android:layout_width="153dp"
+                android:layout_height="wrap_content"
+                android:text="Add"
+                android:id="@+id/addButton"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:padding="16dp"
+                android:textSize="24sp"
+                android:textColor="@android:color/white"
+                android:background="#0091EA"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="5dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CANCEL"
+                android:id="@+id/cancelButton"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:background="#D32F2F"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:layout_marginLeft="5dp"
+                android:paddingLeft="25dp"
+                android:paddingTop="16dp"
+                android:paddingRight="25dp"
+                android:paddingBottom="16dp" />
+        </GridLayout>
+    </LinearLayout>
+
 </RelativeLayout>

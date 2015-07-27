@@ -8,7 +8,7 @@ android {
         applicationId "com.a4.acesmndr.attendance"
         minSdkVersion 10
         targetSdkVersion 22
-        versionCode 7
+        versionCode 9
         versionName "2.0.0"
     }
     buildTypes {
