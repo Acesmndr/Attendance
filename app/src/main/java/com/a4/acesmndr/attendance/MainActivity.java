@@ -125,7 +125,7 @@ public class MainActivity extends ActionBarActivity
         if (id == R.id.action_settings) {
             Intent intent = new Intent(Intent.ACTION_SENDTO);
             intent.setData(Uri.parse("mailto:"));
-            intent.putExtra(Intent.EXTRA_SUBJECT, "Attendance v2.0.0:Bug Report");
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Attendance v2.1.0:Bug Report");
             intent.putExtra(Intent.EXTRA_EMAIL,new String[]{"a4developers@gmail.com"});
             this.startActivity(Intent.createChooser(intent, "Report a Bug via Email"));
             return true;

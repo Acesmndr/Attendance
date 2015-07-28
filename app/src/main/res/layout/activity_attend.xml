@@ -15,15 +15,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginBottom="114dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="68002"
-        android:id="@+id/rollDisplay"
-        android:textSize="100sp"
-        android:layout_marginTop="105dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+
 
     <LinearLayout android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -69,6 +61,23 @@
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp" />
     </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/seekBar2"
+        android:layout_alignStart="@+id/seekBar2"
+        android:layout_above="@+id/seekBar2">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="68002"
+            android:id="@+id/rollDisplay"
+            android:textSize="100sp"
+            android:layout_gravity="center"
+             />
+    </FrameLayout>
 
 
 </RelativeLayout>

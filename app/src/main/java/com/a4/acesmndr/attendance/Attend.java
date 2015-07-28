@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class Attend extends ActionBarActivity {
@@ -33,7 +34,9 @@ public class Attend extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_attend);
+
         Session session=getCurrentSession(getIntent().getExtras().getString("nameOfClass"));
         currentTable=session.getClassName();
         //initiate();
@@ -164,12 +167,22 @@ public class Attend extends ActionBarActivity {
         if (id == R.id.action_settings) {
             Intent intent = new Intent(Intent.ACTION_SENDTO);
             intent.setData(Uri.parse("mailto:"));
-            intent.putExtra(Intent.EXTRA_SUBJECT, "Attendance v2.0.0:Bug Report");
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Attendance v2.1.0:Bug Report");
             intent.putExtra(Intent.EXTRA_EMAIL,new String[]{"a4developers@gmail.com"});
             this.startActivity(Intent.createChooser(intent, "Report a Bug via Email"));
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
+    @Override
+    public void onBackPressed(){
+        int currentProg=sb.getProgress();
+        if(currentProg!=0){
+            sb.setProgress(currentProg - 1);
+            checkIfPresent(currentProg);
+        }else{
+            super.onBackPressed();
+        }
+    }
+
 }

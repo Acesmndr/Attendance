@@ -94,7 +94,7 @@ public class AddClass extends Fragment {
                 nameOfClassX.setText("");
                 rollStartX.setText("1");
                 noSX.setProgress(44);
-                noSDisplayX.setText("Number Of Students: 44");
+                noSDisplayX.setText("Number of students: 44");
             }
         });
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -128,7 +128,7 @@ public class AddClass extends Fragment {
         noSX.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                noSDisplayX.setText("Number of Students: "+progress);
+                noSDisplayX.setText("Number of students: "+progress);
                 currentProgress=progress;
             }
 
@@ -190,7 +190,7 @@ public class AddClass extends Fragment {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             nameOfClassX.setText("");
-                            rollStartX.setText("1");
+                            rollStartX.setText("");
                             noSX.setProgress(44);
                             noSDisplayX.setText("44");
                             dialog.cancel();

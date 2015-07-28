@@ -24,7 +24,8 @@
         <activity
             android:name=".Attend"
             android:label="@string/title_activity_attend"
-            android:screenOrientation="sensorPortrait" >
+            android:screenOrientation="sensorPortrait"
+            android:parentActivityName=".MainActivity">
         </activity>
         <activity
             android:name=".Register"
