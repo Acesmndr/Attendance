@@ -19,6 +19,7 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="5dp"
         android:text="EXPORT"
+        android:padding="5dp"
         android:textSize="18sp"
         android:background="#00C853"
         android:textColor="@android:color/white" />
@@ -33,6 +34,7 @@
         android:textSize="18sp"
         android:text="REGISTER"
         android:background="#0091EA"
+        android:padding="5dp"
         android:textColor="@android:color/white" />
 
 </RelativeLayout>

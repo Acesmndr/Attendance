@@ -75,7 +75,7 @@ public class RegisterList extends Fragment {
         ArrayList<String> list = new ArrayList<String>();
         dbsHandler=new MyDBHandler(getActivity(),null,null,1);
         TextView whatItDoes= (TextView) view.findViewById(R.id.whatItDoes);
-        whatItDoes.setText("Select a class:");
+        whatItDoes.setText("Attendance Register");
         String[] val=dbsHandler.getAllClassesA();
         for(int i=0;i<val.length;i++){
             list.add(val[i]);

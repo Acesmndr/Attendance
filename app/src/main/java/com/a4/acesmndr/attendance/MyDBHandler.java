@@ -147,14 +147,15 @@ public class MyDBHandler extends SQLiteOpenHelper{
         db.execSQL(query_create);
         db.close();
     }
-    public void openClass(String nameOfClass){
+    public boolean openClass(String nameOfClass){
         Session session=findSession(nameOfClass);
         SQLiteDatabase db=getWritableDatabase();
         String query_open="SELECT * FROM class"+session.getID()+" WHERE dateToday ='"+getDate()+"'";
         Cursor cursor=db.rawQuery(query_open,null);
         if(cursor.moveToFirst()){ //test whether the attendance sheet of particular day exists
             cursor.close();
-            return;
+            db.close();
+            return true;
         }
         cursor.close();
         query_open="INSERT INTO class"+session.getID()+" VALUES(NULL,'"+getDate()+"'"; //if not exists add  one
@@ -164,6 +165,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
         query_open+=")";
         db.execSQL(query_open);
         db.close();
+        return false;
 
     }
     public String getDate(){
@@ -202,6 +204,28 @@ public class MyDBHandler extends SQLiteOpenHelper{
         cursor.close();
         db.close();
         return presence;
+    }
+    public int iWasPresentFor(String tableName,int roll){
+        Session session=findSession(tableName);
+        SQLiteDatabase db=getWritableDatabase();
+        String query="SELECT COUNT(*) as countPresence FROM class"+session.getID()+" WHERE s"+roll+"=1";
+        Cursor cursor=db.rawQuery(query,null);
+        cursor.moveToFirst();
+        int c=cursor.getInt(0);
+        cursor.close();
+        db.close();
+        return c;
+    }
+    public int attendanceDoneFor(String tableName){
+        Session session=findSession(tableName);
+        SQLiteDatabase db=getWritableDatabase();
+        String query="SELECT COUNT(*) as countPresence FROM class"+session.getID();
+        Cursor cursor=db.rawQuery(query,null);
+        cursor.moveToFirst();
+        int c=cursor.getInt(0);
+        cursor.close();
+        db.close();
+        return c;
     }
     public int entry(String tableName){
         Session session=findSession(tableName);

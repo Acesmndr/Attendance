@@ -27,7 +27,9 @@ public class Attend extends ActionBarActivity {
     TextView rollDisplay;
     Button present;
     Button absent;
-    int roll,noS;
+    Button register;
+    TextView daysPresent;
+    int roll,noS,noDays;
     boolean virginity=true; //check if today's class has been already added
     String currentTable;
 
@@ -43,9 +45,12 @@ public class Attend extends ActionBarActivity {
         setTitle(currentTable);
         roll=session.getRollStart();
         noS=session.getNoS();
+        noDays=attendanceDays();
         rollDisplay= (TextView) findViewById(R.id.rollDisplay);
+        daysPresent=(TextView) findViewById(R.id.daysPresent);
         present= (Button) findViewById(R.id.present);
         absent= (Button) findViewById(R.id.absent);
+        register=(Button) findViewById(R.id.registerButton);
         present.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,11 +63,21 @@ public class Attend extends ActionBarActivity {
                 progress(0,sb.getProgress());
             }
         });
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Attend.this,Register.class);
+                intent.putExtra("nameOfClass",currentTable);
+                Attend.this.startActivity(intent);
+
+            }
+        });
         rollDisplay.setText(Integer.toString(roll));
         sb= (SeekBar) findViewById(R.id.seekBar2);
         sb.setMax(noS-1);
         sb.setProgress(0);
         checkIfPresent(0);
+        daysPresent.setText(noOfDaysPresent(0) + " out of " + noDays + " days!");
         sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -74,19 +89,23 @@ public class Attend extends ActionBarActivity {
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
                 rollDisplay.setTextColor(Color.BLACK);
+                daysPresent.setText("Experimental Feature!");
 
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 checkIfPresent(sb.getProgress());
+                daysPresent.setText(noOfDaysPresent(sb.getProgress())+" out of "+noDays+" days!");
 
             }
         });
     }
     public void initiate(){
         MyDBHandler dbHandler=new MyDBHandler(Attend.this,null,null,1);
-        dbHandler.openClass(currentTable);
+        if(!dbHandler.openClass(currentTable)){
+            noDays+=1;
+        }
         virginity=false;
     }
     public Session getCurrentSession(String nameOfClass){
@@ -112,16 +131,18 @@ public class Attend extends ActionBarActivity {
             CharSequence title="Attendance complete";
             CharSequence details=presentCount+" out of "+noS+" are Present";
             Intent intent=new Intent(context,Register.class);
-            intent.putExtra("nameOfClass",currentTable);
+            intent.putExtra("nameOfClass", currentTable);
             PendingIntent pendingIntent=PendingIntent.getActivity(context,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
-            notification.setLatestEventInfo(context,title,details,pendingIntent);
+            notification.setLatestEventInfo(context, title, details, pendingIntent);
             notificationManager.notify(0, notification);
             vibrator.vibrate(350);
             checkIfPresent(progress);
-            }else{
+            }else {
             checkIfPresent(progress + 1);
+            daysPresent.setText(noOfDaysPresent(progress+1)+" out of "+noDays+" days!");
         }
         sb.setProgress(progress + 1);
+
     }
     public void markPresent(int sId){
         MyDBHandler dbHandler=new MyDBHandler(Attend.this,null,null,1);
@@ -141,6 +162,14 @@ public class Attend extends ActionBarActivity {
         }else{
             rollDisplay.setTextColor(Color.BLACK);
         }
+    }
+    public int attendanceDays(){
+        MyDBHandler dbHandler=new MyDBHandler(Attend.this,null,null,1);
+        return dbHandler.attendanceDoneFor(currentTable);
+    }
+    public int noOfDaysPresent(int sId){
+        MyDBHandler dbHandler=new MyDBHandler(Attend.this,null,null,1);
+        return dbHandler.iWasPresentFor(currentTable,sId);
     }
 
     public int getTotalPresent(){
@@ -178,8 +207,9 @@ public class Attend extends ActionBarActivity {
     public void onBackPressed(){
         int currentProg=sb.getProgress();
         if(currentProg!=0){
-            sb.setProgress(currentProg - 1);
-            checkIfPresent(currentProg);
+            sb.setProgress(currentProg-1);
+            checkIfPresent(currentProg-1);
+            daysPresent.setText(noOfDaysPresent(currentProg-1)+" out of "+noDays+" days!");
         }else{
             super.onBackPressed();
         }

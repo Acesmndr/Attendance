@@ -92,7 +92,7 @@ public class AddClass extends Fragment {
             @Override
             public void onClick(View v) {
                 nameOfClassX.setText("");
-                rollStartX.setText("1");
+                rollStartX.setText("");
                 noSX.setProgress(44);
                 noSDisplayX.setText("Number of students: 44");
             }
