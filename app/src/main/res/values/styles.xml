@@ -11,5 +11,6 @@
 
         <!-- Support library compatibility -->
         <item name="background">@android:color/holo_blue_dark</item>
+        <item name="homeAsUpIndicator">@drawable/ic_menu_white_24dp</item>
     </style>
 </resources>

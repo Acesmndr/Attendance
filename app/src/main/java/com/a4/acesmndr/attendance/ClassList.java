@@ -1,12 +1,15 @@
 package com.a4.acesmndr.attendance;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -75,13 +78,17 @@ public class ClassList extends Fragment {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_list, container, false);
         ArrayList<String> list = new ArrayList<String>();
+        ImageView altImg= (ImageView) view.findViewById(R.id.alternativeImage);
         //setTitle("Attendance:Select a Class");
         sessionListView= (ListView) view.findViewById(R.id.listView);
         dbsHandler=new MyDBHandler(getActivity(),null,null,1);
         if(dbsHandler.getSessionCount()==0) {
             TextView whatItDoes = (TextView) view.findViewById(R.id.whatItDoes);
             whatItDoes.setText("Please add a class!");
-            }
+            altImg.setVisibility(View.VISIBLE);
+            }else{
+            altImg.setVisibility(View.GONE);
+        }
         String[] val;
         val=dbsHandler.getAllClassesA();
         for(int i=0;i<val.length;i++){

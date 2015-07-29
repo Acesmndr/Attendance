@@ -8,7 +8,8 @@
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:paddingLeft="8dp"
-        android:textSize="18sp"
+        android:layout_toLeftOf="@id/add_btn"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         />
 
     <Button
@@ -20,7 +21,7 @@
         android:layout_marginRight="5dp"
         android:text="EXPORT"
         android:padding="5dp"
-        android:textSize="18sp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:background="#00C853"
         android:textColor="@android:color/white" />
 
@@ -31,7 +32,7 @@
         android:layout_toLeftOf="@id/delete_btn"
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
-        android:textSize="18sp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="REGISTER"
         android:background="#0091EA"
         android:padding="5dp"

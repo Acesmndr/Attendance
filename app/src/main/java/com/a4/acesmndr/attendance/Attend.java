@@ -27,7 +27,6 @@ public class Attend extends ActionBarActivity {
     TextView rollDisplay;
     Button present;
     Button absent;
-    Button register;
     TextView daysPresent;
     int roll,noS,noDays;
     boolean virginity=true; //check if today's class has been already added
@@ -50,7 +49,6 @@ public class Attend extends ActionBarActivity {
         daysPresent=(TextView) findViewById(R.id.daysPresent);
         present= (Button) findViewById(R.id.present);
         absent= (Button) findViewById(R.id.absent);
-        register=(Button) findViewById(R.id.registerButton);
         present.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,16 +58,7 @@ public class Attend extends ActionBarActivity {
         absent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progress(0,sb.getProgress());
-            }
-        });
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(Attend.this,Register.class);
-                intent.putExtra("nameOfClass",currentTable);
-                Attend.this.startActivity(intent);
-
+                progress(0, sb.getProgress());
             }
         });
         rollDisplay.setText(Integer.toString(roll));
@@ -77,7 +66,7 @@ public class Attend extends ActionBarActivity {
         sb.setMax(noS-1);
         sb.setProgress(0);
         checkIfPresent(0);
-        daysPresent.setText(noOfDaysPresent(0) + " out of " + noDays + " days!");
+        daysPresent.setText("Present for "+noOfDaysPresent(0) + " out of " + noDays + " days");
         sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -89,14 +78,14 @@ public class Attend extends ActionBarActivity {
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
                 rollDisplay.setTextColor(Color.BLACK);
-                daysPresent.setText("Experimental Feature!");
+                daysPresent.setText("Attendance v2.1.0");
 
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 checkIfPresent(sb.getProgress());
-                daysPresent.setText(noOfDaysPresent(sb.getProgress())+" out of "+noDays+" days!");
+                daysPresent.setText("Present for "+noOfDaysPresent(sb.getProgress())+" out of "+noDays+" days");
 
             }
         });

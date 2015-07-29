@@ -1,9 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:layout_height="match_parent"
     tools:context="com.a4.acesmndr.attendance.Attend">
 
     <SeekBar
@@ -28,9 +25,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Present"
+        android:text="PRESENT"
         android:id="@+id/present"
-        android:textSize="25sp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:background="#0091EA"
         android:textColor="@android:color/white"
         android:paddingLeft="10dp"
@@ -46,9 +43,9 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Absent"
+        android:text="ABSENT"
         android:id="@+id/absent"
-        android:textSize="25sp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@android:color/white"
         android:background="#D32F2F"
         android:paddingLeft="10dp"
@@ -86,28 +83,13 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/daysPresent"
-            android:layout_gravity="left|top"
-            android:paddingTop="15dp"
-            android:paddingBottom="14dp"
-            android:paddingLeft="20dp"
-            android:background="#BDBDBD"
-            android:textColor="@android:color/white"
-            android:textSize="16sp"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="v2.1.0"
-            android:id="@+id/registerButton"
-            android:layout_alignParentBottom="true"
-            android:layout_alignRight="@+id/linearLayout"
-            android:layout_alignEnd="@+id/linearLayout"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_gravity="right|top"
-            android:padding="10dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:background="@android:color/holo_blue_light"
+            android:gravity="center"
             android:textColor="@android:color/white"
-            android:textSize="16sp" />
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"/>
+
 
     </FrameLayout>
 
