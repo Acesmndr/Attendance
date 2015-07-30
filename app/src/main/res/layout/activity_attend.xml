@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="PRESENT"
+        android:text="@string/present"
         android:id="@+id/present"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:background="#0091EA"
@@ -43,7 +43,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ABSENT"
+        android:text="@string/absent"
         android:id="@+id/absent"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@android:color/white"
@@ -71,7 +71,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="68002"
+            android:text="@string/roll"
             android:id="@+id/rollDisplay"
             android:textSize="100sp"
             android:layout_gravity="center"

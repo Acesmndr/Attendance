@@ -155,7 +155,7 @@ public class CustomListAdapter extends BaseAdapter implements ListAdapter {
                                             Intent intent = new Intent(Intent.ACTION_SENDTO);
                                             intent.setData(Uri.parse("mailto:"));
                                             intent.putExtra(Intent.EXTRA_SUBJECT, "Attendance Register of " + getItem(position).toString());
-                                            intent.putExtra(Intent.EXTRA_TEXT, "\n\nAttendance v2.1.0 beta \nhttps://goo.gl/AMs90z\n A4 Developers");
+                                            intent.putExtra(Intent.EXTRA_TEXT, "\n\nAttendance v2.1.1 \nhttps://goo.gl/AMs90z\n A4 Developers");
                                             File root = Environment.getExternalStorageDirectory();
                                             File file = new File(root, "/Download/Attendance/" + getItem(position).toString() + ".csv");
                                             if (!file.exists() || !file.canRead()) {
@@ -190,7 +190,7 @@ public class CustomListAdapter extends BaseAdapter implements ListAdapter {
     public String writeExternal(String nameOfClass){
         MyDBHandler dbHandler=new MyDBHandler(context,null,null,1);
         String[][] data=dbHandler.dataToExport(nameOfClass);
-        String toPrint=nameOfClass+"\nAttendance v2.1.0 Beta\n\n";
+        String toPrint=nameOfClass+"\nAttendance v2.1.1 \n\n";
         for(int i=0;i<data.length;i++ ){
             for(int j=0;j<data[0].length;j++){
                 if(j==0){

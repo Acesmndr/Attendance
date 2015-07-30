@@ -2,10 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" tools:context="com.a4.acesmndr.attendance.ClassList">
 
-
-
-
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -15,7 +11,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="My Class List"
+            android:text="@string/subTitle"
             android:id="@+id/whatItDoes"
             android:layout_gravity="top|left|center_vertical"
             android:textColor="@android:color/white"

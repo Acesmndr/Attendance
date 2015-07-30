@@ -12,7 +12,8 @@
         android:gravity="center"
         android:textColor="@android:color/white"
         android:paddingTop="10dp"
-        android:paddingBottom="10dp"/>
+        android:paddingBottom="10dp"
+        android:layout_marginBottom="2dp" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -90,6 +91,15 @@
             <TextView
                 android:background="@drawable/card"
                 android:text="@string/faq8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:padding="15dp"
+                android:layout_margin="2dp"/>
+            <TextView
+                android:background="@drawable/card"
+                android:text="@string/faq9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left"

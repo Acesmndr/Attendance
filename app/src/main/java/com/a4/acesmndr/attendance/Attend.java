@@ -78,7 +78,7 @@ public class Attend extends ActionBarActivity {
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
                 rollDisplay.setTextColor(Color.BLACK);
-                daysPresent.setText("Attendance v2.1.0");
+                daysPresent.setText(getString(R.string.app_version));
 
             }
 
@@ -185,7 +185,7 @@ public class Attend extends ActionBarActivity {
         if (id == R.id.action_settings) {
             Intent intent = new Intent(Intent.ACTION_SENDTO);
             intent.setData(Uri.parse("mailto:"));
-            intent.putExtra(Intent.EXTRA_SUBJECT, "Attendance v2.1.0:Bug Report");
+            intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_version)+":Bug Report");
             intent.putExtra(Intent.EXTRA_EMAIL,new String[]{"a4developers@gmail.com"});
             this.startActivity(Intent.createChooser(intent, "Report a Bug via Email"));
             return true;

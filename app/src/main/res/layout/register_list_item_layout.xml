@@ -19,7 +19,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="5dp"
-        android:text="EXPORT"
+        android:text="@string/export"
         android:padding="5dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:background="#00C853"
@@ -33,7 +33,7 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="REGISTER"
+        android:text="@string/register"
         android:background="#0091EA"
         android:padding="5dp"
         android:textColor="@android:color/white" />

@@ -19,7 +19,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="5dp"
-        android:text="DELETE"
+        android:text="@string/delete"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:background="#DD2C00"
         android:padding="5dp"
@@ -33,7 +33,7 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="OPEN"
+        android:text="@string/open"
         android:padding="5dp"
         android:background="#0091EA"
         android:textColor="@android:color/white" />

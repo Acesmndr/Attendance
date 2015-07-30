@@ -1,9 +1,14 @@
 <resources>
     <string name="app_name">Attendance</string>
+    <string name="title_activity_attend">Attendance</string>
+    <string name="app_version">Attendance v2.1.1</string>
+    <!--Attendance version required in CustomListAdapter :158:193 -->
 
     <string name="title_section1">My Class List</string>
     <string name="title_section2">Add a Class</string>
     <string name="title_section3">Attendance Register</string>
+    <string name="title_section4">FAQ</string>
+    <string name="title_section5">About Application</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -11,28 +16,47 @@
     <string name="action_example">Example action</string>
 
     <string name="action_settings">Report a Bug</string>
-    <string name="name_of_class">Class:</string>
-    <string name="roll_start">Starts from no:</string>
-    <string name="no_of_students">No Of Students:</string>
     <string name="title_activity_list">List</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_attendance">Attendance</string>
     <string name="title_activity_register">Register</string>
 
-<!-- TODO: Remove or change this placeholder text -->
 
-    <string name="title_activity_attend">Attendance</string>
-    <string name="title_activity_registerx">Registerx</string>
+    <!--ATTEND-->
+    <string name="present">PRESENT</string>
+    <string name="absent">ABSENT</string>
+    <string name="roll">68002</string>
+
+    <!--ABOUT US-->
+    <string name="version_title">Attendance v2.1.1</string>
+    <string name="developers">A4 Developers</string>
+    <string name="developers_name">Aashish Manandhar\nAayush Rijal\nAnkit Shrestha\nAbhishek Khatri</string>
+    <string name="queries">ANY SUGGESTIONS OR QUERIES&#63;</string>
+
+    <!--ADD CLASS-->
+    <string name="name_hint">Name of class</string>
+    <string name="roll_hint">Roll number starts from</string>
+    <string name="nos">Number of students\: 44</string>
+    <string name="addButton">ADD</string>
+    <string name="cancelButton">CANCEL</string>
+
+    <!--CLASS LIST-->
+    <string name="subTitle">My Class List</string>
+    <string name="open">OPEN</string>
+    <string name="delete">DELETE</string>
+    <string name="register">REGISTER</string>
+    <string name="export">EXPORT</string>
+
+    <!--FAQ PAGE TEXT -->
     <string name="faq_title">Frequently Asked Questions</string>
-    <string name="faq1"><b>1. Why isn\'t a new entry created for a class when I open the app and the same class again later\?</b>\n\nThe basic concept of this app is attendance is done atmost once a day for a class. So if you open the same class and start doing attendance again you are correcting the attendance of that particular day.</string>
-    <string name="faq2"><b>2. Will the register consist of attendance of all the  dates or just the dates I take attendance\?</b>\n\nJust the days you take it</string>
-    <string name="faq3"><b>3. Can I correct the attendance of a student after I close the app\?</b>\n\nYes you can by opening the class again and sliding to the desired student\'s roll number.</string>
-    <string name="faq4"><b>4. Why isn\'t the attendance of all the days shown in the register\?</b>\n\nRegister shows the sum total of all the days attendance has been carried out in the last column and shows the attendance of atmost last 6 working days.</string>
-    <string name="faq5"><b>5. Can I export the attendance to a Spreadsheet \(Excel\) file format\?</b>\n\nYup\! Just press export in attendance register tab for the desired class.</string>
-    <string name="faq6"><b>6. Can I mail the spreadsheet file\?</b>\n\nOf Course you can do that\! First export it and then mailing options are provided</string>
-    <string name="faq7"><b>7. Where is the exported file stored\?</b>\n\nIt is stored in the \"Download\" folder of Internal Storage</string>
-    <string name="faq8"><b>8. What does present for 10 out of 12 days mean\?</b>\n\nIt means the current student is present for 10 days out of the total 12 working days including today.</string>
-
+    <string name="faq1"><b>1. Why isn\&#39;t a new entry created for a class when I open the app and the same class again later&#63;</b>\n\nThe basic concept of this app is attendance is done atmost once a day for a class. So if you open the same class and start doing attendance again you are correcting the attendance of that particular day.</string>
+    <string name="faq2"><b>2. Will the register consist of attendance of all the  dates or just the dates I take attendance&#63;</b>\n\nJust the days you take it</string>
+    <string name="faq3"><b>3. Can I correct the attendance of a student after I close the app&#63;</b>\n\nYes you can by opening the class again and sliding to the desired student\&#39;s roll number.</string>
+    <string name="faq4"><b>4. Why isn\&#39;t the attendance of all the days shown in the register&#63;</b>\n\nRegister shows the sum total of all the days attendance has been carried out in the last column and shows the attendance of atmost last 6 working days.</string>
+    <string name="faq5"><b>5. Can I export the attendance to a Spreadsheet &#40;Excel&#41; file format&#63;</b>\n\nYup&#x21; Just press export in attendance register tab for the desired class.</string>
+    <string name="faq6"><b>6. Can I mail the spreadsheet file&#63;</b>\n\nOf Course you can do that\&#x21; First export it and then mailing options are provided</string>
+    <string name="faq7"><b>7. Where is the exported file stored&#63;</b>\n\nIt is stored in the &#34;Download&#34; folder of Internal Storage</string>
+    <string name="faq8"><b>8. What does present for 10 out of 12 days mean&#63;</b>\n\nIt means the current student is present for 10 days out of the total 12 working days including today.</string>
+    <string name="faq9"><b>9. Why is the attendance register loading so slow&#63;</b>\n\nPlease be patient&#x21; It\&#39;s because it is calculating the total attendance of each student and dynamically creating the table elements.</string>
 
 </resources>

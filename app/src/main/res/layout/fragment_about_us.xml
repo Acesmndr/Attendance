@@ -17,7 +17,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Attendance v2.1.0 Beta"
+            android:text="@string/app_version"
             android:id="@+id/textView5"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:background="@android:color/holo_blue_light"
@@ -37,7 +37,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="A4 Developers"
+            android:text="@string/developers"
             android:id="@+id/developerSwitch"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textStyle="bold"
@@ -53,7 +53,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Aashish Manandhar\nAayush Rijal\nAnkit Shrestha\nAbhishek Khatri"
+            android:text="@string/developers_name"
             android:id="@+id/developerDisplay"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textStyle="bold"
@@ -67,7 +67,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ANY SUGGESTIONS OR QUERIES?"
+            android:text="@string/queries"
             android:id="@+id/queries"
             android:layout_weight="0.18"
             android:background="@android:color/white"
