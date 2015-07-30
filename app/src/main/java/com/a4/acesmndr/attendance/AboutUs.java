@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 /**
@@ -21,6 +22,7 @@ import android.widget.Button;
  */
 public class AboutUs extends Fragment {
     Button queries;
+    TextView developerSwitch,developerDisplay;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -67,6 +69,14 @@ public class AboutUs extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_about_us, container, false);
+        developerSwitch= (TextView) view.findViewById(R.id.developerSwitch);
+        developerDisplay= (TextView) view.findViewById(R.id.developerDisplay);
+        developerSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                developerDisplay.setVisibility(View.VISIBLE);
+            }
+        });
         queries= (Button) view.findViewById(R.id.queries);
         queries.setOnClickListener(new View.OnClickListener() {
             @Override

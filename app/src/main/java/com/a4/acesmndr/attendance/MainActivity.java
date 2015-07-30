@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 
 
 public class MainActivity extends ActionBarActivity
-        implements AddClass.OnFragmentInteractionListener,ClassList.OnFragmentInteractionListener,RegisterList.OnFragmentInteractionListener,AboutUs.OnFragmentInteractionListener, NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements AddClass.OnFragmentInteractionListener,ClassList.OnFragmentInteractionListener,RegisterList.OnFragmentInteractionListener,AboutUs.OnFragmentInteractionListener,FAQ.OnFragmentInteractionListener, NavigationDrawerFragment.NavigationDrawerCallbacks {
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -62,6 +62,11 @@ public class MainActivity extends ActionBarActivity
             fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
         }
         if(position==3) {
+            fragment = new FAQ();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
+        }
+        if(position==4){
             fragment = new AboutUs();
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();

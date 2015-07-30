@@ -21,7 +21,18 @@
     <string name="title_activity_register">Register</string>
 
 <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="title_activity_attend">Attendance</string>
     <string name="title_activity_registerx">Registerx</string>
+    <string name="faq_title">Frequently Asked Questions</string>
+    <string name="faq1"><b>1. Why isn\'t a new entry created for a class when I open the app and the same class again later\?</b>\n\nThe basic concept of this app is attendance is done atmost once a day for a class. So if you open the same class and start doing attendance again you are correcting the attendance of that particular day.</string>
+    <string name="faq2"><b>2. Will the register consist of attendance of all the  dates or just the dates I take attendance\?</b>\n\nJust the days you take it</string>
+    <string name="faq3"><b>3. Can I correct the attendance of a student after I close the app\?</b>\n\nYes you can by opening the class again and sliding to the desired student\'s roll number.</string>
+    <string name="faq4"><b>4. Why isn\'t the attendance of all the days shown in the register\?</b>\n\nRegister shows the sum total of all the days attendance has been carried out in the last column and shows the attendance of atmost last 6 working days.</string>
+    <string name="faq5"><b>5. Can I export the attendance to a Spreadsheet \(Excel\) file format\?</b>\n\nYup\! Just press export in attendance register tab for the desired class.</string>
+    <string name="faq6"><b>6. Can I mail the spreadsheet file\?</b>\n\nOf Course you can do that\! First export it and then mailing options are provided</string>
+    <string name="faq7"><b>7. Where is the exported file stored\?</b>\n\nIt is stored in the \"Download\" folder of Internal Storage</string>
+    <string name="faq8"><b>8. What does present for 10 out of 12 days mean\?</b>\n\nIt means the current student is present for 10 days out of the total 12 working days including today.</string>
+
+
 </resources>

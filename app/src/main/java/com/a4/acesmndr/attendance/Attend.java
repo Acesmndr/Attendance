@@ -128,7 +128,7 @@ public class Attend extends ActionBarActivity {
             checkIfPresent(progress);
             }else {
             checkIfPresent(progress + 1);
-            daysPresent.setText(noOfDaysPresent(progress+1)+" out of "+noDays+" days!");
+            daysPresent.setText("Present for "+noOfDaysPresent(progress+1)+" out of "+noDays+" days");
         }
         sb.setProgress(progress + 1);
 
@@ -198,7 +198,7 @@ public class Attend extends ActionBarActivity {
         if(currentProg!=0){
             sb.setProgress(currentProg-1);
             checkIfPresent(currentProg-1);
-            daysPresent.setText(noOfDaysPresent(currentProg-1)+" out of "+noDays+" days!");
+            daysPresent.setText("Present for "+noOfDaysPresent(currentProg-1)+" out of "+noDays+" days");
         }else{
             super.onBackPressed();
         }

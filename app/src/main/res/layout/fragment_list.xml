@@ -26,12 +26,33 @@
             android:textSize="18sp"
             android:layout_marginBottom="5dp"/>
 
-        <ImageView
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/alternativeImage"
-            android:src="@drawable/attendance_logo"
-            android:visibility="gone" />
+            android:layout_height="192dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/card"
+            android:id="@+id/alternativeDisplay"
+            android:layout_margin="5dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:id="@+id/registerIcon"
+                android:layout_gravity="center"
+                android:src="@drawable/alt_image" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Let&apos;s start by adding a class"
+                android:textColor="#9E9E9E"
+                android:id="@+id/textView"
+                android:layout_gravity="center_horizontal|top"
+                android:textStyle="normal|bold" />
+        </FrameLayout>
 
         <ListView
             android:layout_width="wrap_content"

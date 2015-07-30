@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -73,10 +75,28 @@ public class RegisterList extends Fragment {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_list, container, false);
         ArrayList<String> list = new ArrayList<String>();
+        FrameLayout fl= (FrameLayout) view.findViewById(R.id.alternativeDisplay);
         dbsHandler=new MyDBHandler(getActivity(),null,null,1);
         TextView whatItDoes= (TextView) view.findViewById(R.id.whatItDoes);
         whatItDoes.setText("Attendance Register");
         String[] val=dbsHandler.getAllClassesA();
+        if(dbsHandler.getSessionCount()==0) {
+            whatItDoes.setText("Namaste");
+            fl.setVisibility(view.VISIBLE);
+            ImageView newClass= (ImageView) view.findViewById(R.id.registerIcon);
+            newClass.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Fragment newFragment = new AddClass();
+                    android.support.v4.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    transaction.replace(R.id.container, newFragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                }
+            });
+        }else{
+            fl.setVisibility(view.GONE);
+        }
         for(int i=0;i<val.length;i++){
             list.add(val[i]);
         }
