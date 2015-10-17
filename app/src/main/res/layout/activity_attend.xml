@@ -10,7 +10,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="114dp" />
+        android:layout_marginBottom="114dp"
+        android:progressTint="#03A9F4" />
 
 
 
@@ -84,7 +85,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/daysPresent"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:background="@android:color/holo_blue_light"
+            android:background="@color/accent_material_dark"
             android:gravity="center"
             android:textColor="@android:color/white"
             android:paddingTop="10dp"

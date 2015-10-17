@@ -30,7 +30,7 @@
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/editText"
-            android:background="@android:color/holo_blue_dark"
+            android:background="@color/colorPrimaryMaterial"
             android:padding="10dp"
             android:textColor="@android:color/white"
             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -48,8 +48,8 @@
             android:ems="10"
             android:id="@+id/editText2"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:background="@android:color/holo_blue_dark"
             android:padding="10dp"
+            android:background="@color/colorPrimaryMaterial"
             android:hint="@string/roll_hint"
             android:textColorHint="@android:color/white"
             android:textColor="@android:color/white"
@@ -63,7 +63,7 @@
             android:text="@string/nos"
             android:id="@+id/textView4"
             android:layout_margin="5px"
-            android:background="@android:color/holo_blue_dark"
+            android:background="@color/colorPrimaryMaterial"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:padding="10dp"
             android:textColor="@android:color/white" />
@@ -78,7 +78,8 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:max="50"
-            android:progress="44" />
+            android:progress="44"
+            android:progressTint="#03A9F4" />
 
         <GridLayout
             android:layout_width="wrap_content"

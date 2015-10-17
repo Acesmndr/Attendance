@@ -8,7 +8,7 @@
         android:id="@+id/subTitle"
         android:text="@string/faq_title"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:background="@android:color/holo_blue_light"
+        android:background="@color/accent_material_dark"
         android:gravity="center"
         android:textColor="@android:color/white"
         android:paddingTop="10dp"

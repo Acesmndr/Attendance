@@ -1,6 +1,7 @@
 package com.a4.acesmndr.attendance;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,6 +29,7 @@ public class CustomListAdapter extends BaseAdapter implements ListAdapter {
     private ArrayList<String> list = new ArrayList<String>();
     private Context context;
     private int whichList;
+    ProgressDialog progress;
 
     public CustomListAdapter(ArrayList<String> list, Context context,int whichList) {
         this.list = list;
@@ -80,10 +82,10 @@ public class CustomListAdapter extends BaseAdapter implements ListAdapter {
                     intent.putExtra("nameOfClass", itemValue);
                     context.startActivity(intent);
                 }else{
-                    if(noOfDataEntry(itemValue)==0){
+                     if(noOfDataEntry(itemValue)==0){
                         Toast.makeText(context,"Register is empty!",Toast.LENGTH_LONG).show();
                     }else {
-                        intent = new Intent(context, Register.class);
+                          intent = new Intent(context, Register.class);
                         intent.putExtra("nameOfClass", itemValue);
                         context.startActivity(intent);
                     }
@@ -94,6 +96,7 @@ public class CustomListAdapter extends BaseAdapter implements ListAdapter {
         deleteBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                //progress.show(context,"asdfsd","asdf",true,true);
                 if (whichList == 1) {
                     AlertDialog.Builder builder=new AlertDialog.Builder(context);
                     builder.setMessage("Delete "+getItem(position).toString()+" ?")
@@ -121,6 +124,7 @@ public class CustomListAdapter extends BaseAdapter implements ListAdapter {
                     if(noOfDataEntry(getItem(position).toString())==0){
                         Toast.makeText(context,"Register is empty!",Toast.LENGTH_LONG).show();
                     }else {
+
                         if (canWriteOnExternalStorage()) {
                             // get the path to sdcard
                             File sdcard = Environment.getExternalStorageDirectory();
@@ -155,7 +159,7 @@ public class CustomListAdapter extends BaseAdapter implements ListAdapter {
                                             Intent intent = new Intent(Intent.ACTION_SENDTO);
                                             intent.setData(Uri.parse("mailto:"));
                                             intent.putExtra(Intent.EXTRA_SUBJECT, "Attendance Register of " + getItem(position).toString());
-                                            intent.putExtra(Intent.EXTRA_TEXT, "\n\nAttendance v2.1.1 \nhttps://goo.gl/AMs90z\n A4 Developers");
+                                            intent.putExtra(Intent.EXTRA_TEXT, "\n\nAttendance v2.1.2 \nhttps://goo.gl/AMs90z\n A4 Developers");
                                             File root = Environment.getExternalStorageDirectory();
                                             File file = new File(root, "/Download/Attendance/" + getItem(position).toString() + ".csv");
                                             if (!file.exists() || !file.canRead()) {
@@ -168,6 +172,7 @@ public class CustomListAdapter extends BaseAdapter implements ListAdapter {
                                         }
                                     });
                             AlertDialog alertDialog = builder.create();
+                            //progress.dismiss();
                             alertDialog.show();
 
 
@@ -187,10 +192,11 @@ public class CustomListAdapter extends BaseAdapter implements ListAdapter {
         return false;
     }
 
+
     public String writeExternal(String nameOfClass){
         MyDBHandler dbHandler=new MyDBHandler(context,null,null,1);
         String[][] data=dbHandler.dataToExport(nameOfClass);
-        String toPrint=nameOfClass+"\nAttendance v2.1.1 \n\n";
+        String toPrint=nameOfClass+"\nAttendance v2.1.2 \n\n";
         for(int i=0;i<data.length;i++ ){
             for(int j=0;j<data[0].length;j++){
                 if(j==0){

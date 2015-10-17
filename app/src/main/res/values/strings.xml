@@ -28,9 +28,9 @@
     <string name="roll">68002</string>
 
     <!--ABOUT US-->
-    <string name="version_title">Attendance v2.1.1</string>
+    <string name="version_title">Attendance v2.1.2</string>
     <string name="developers">A4 Developers</string>
-    <string name="developers_name">Aashish Manandhar\nAayush Rijal\nAnkit Shrestha\nAbhishek Khatri</string>
+    <string name="developers_name">Aashish Manandhar (acesmndr)\nAayush Rijal\nAnkit Shrestha\nAbhishek Khatri</string>
     <string name="queries">ANY SUGGESTIONS OR QUERIES&#63;</string>
 
     <!--ADD CLASS-->
